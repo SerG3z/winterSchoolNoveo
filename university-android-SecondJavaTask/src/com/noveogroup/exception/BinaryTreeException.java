@@ -5,5 +5,5 @@ package com.noveogroup.exception;
  * You can change it and create subclasses (ElementAlreadyExistsException, for example).
  */
 public class BinaryTreeException extends Exception {
-    
+
 }
