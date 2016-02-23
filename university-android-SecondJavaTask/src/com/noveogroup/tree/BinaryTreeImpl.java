@@ -1,7 +1,10 @@
 package com.noveogroup.tree;
 
+import com.noveogroup.exception.NotFoundElementToTreeException;
+import com.noveogroup.exception.WritingToFileException;
 import com.noveogroup.model.TreeElement;
 
+import java.io.*;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -9,14 +12,14 @@ import java.util.LinkedList;
 /**
  * Sample implementation.
  */
-public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> implements BinaryTree<K, V> {
+public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> implements BinaryTree<K, V>, Serializable {
 
     private Node root;
     private int size;
 
-    private class Node  {
-        private Object key;
-        private Object value;
+    private class Node implements Serializable{
+        Object key;
+        Object value;
         Node left;
         Node right;
 
@@ -25,11 +28,6 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
             this.value = element;
             left = null;
             right = null;
-        }
-
-        @Override
-        public String toString() {
-            return "key = " + key + ", value =  " + value;
         }
     }
 
@@ -82,26 +80,6 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
                 }
             }
         }
-    }
-
-    private Node getLastHouseOnTheLeft(final Node start) {
-        Node candidate = null;
-        Node parent = null;
-        Node node = start;
-
-        while (node != null) {
-            if (node.left != null) {
-                parent = node;
-                candidate = node.left;
-            }
-            node = node.left;
-        }
-
-        if (parent != null) {
-            parent.left = null;
-        }
-
-        return candidate;
     }
 
     private void leftMissingRightMissing(K key, Node node, Node parent) {
@@ -169,7 +147,7 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
     }
 
     @Override
-    public void removeElement(K key) {
+    public void removeElement(K key) throws NotFoundElementToTreeException {
         if (key == null) {
             return;
         }
@@ -200,6 +178,7 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
                 rootNode = (key.compareTo(rootNode.key) == -1) ? rootNode.left : rootNode.right;
             }
         }
+        throw new NotFoundElementToTreeException(key.toString());
 
     }
 
@@ -236,12 +215,35 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
 
     }
 
-
-
     @Override
     public Iterator<V> getIterator() {
         return new IteratorImpl();
     }
+
+    public void writeToFile(File file) throws WritingToFileException {
+        if (file == null) {
+            return;
+        }
+        try {
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(file));
+            outputStream.writeObject(size);
+            writeToFileTree(outputStream, root);
+            outputStream.close();
+            System.out.println("Tree complete writed to file");
+        } catch (IOException e) {
+            throw new WritingToFileException(e.getMessage());
+        }
+    }
+
+    private void writeToFileTree(ObjectOutputStream outputStream, Node node) throws IOException {
+        if (node == null) {
+            return;
+        }
+        outputStream.writeObject(node);
+        writeToFileTree(outputStream, node.left);
+        writeToFileTree(outputStream, node.right);
+    }
+
 
 
 }

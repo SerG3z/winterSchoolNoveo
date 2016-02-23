@@ -8,6 +8,6 @@ public class ElementForExample implements TreeElement {
 
     @Override
     public int getId() {
-        return 0;
+        return 1;
     }
 }
