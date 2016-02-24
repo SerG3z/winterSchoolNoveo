@@ -17,7 +17,7 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
     private Node root;
     private int size;
 
-    private class Node implements Serializable{
+    private class Node implements Serializable {
         Object key;
         Object value;
         Node left;
@@ -51,7 +51,7 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
         if (key == null || element == null) {
             return;
         }
-
+        size++;
         Node newNode = new Node(key, element);
         if (root == null) {
             root = newNode;
@@ -154,28 +154,31 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
         if (root == null) {
             return;
         }
-        Node rootNode = root;
-        Node deleteNode = null;
+        Node node = root;
         Node parent = null;
 
-        while (rootNode != null) {
-            if (key.compareTo(rootNode.key) == 0) {
+        while (node != null) {
+            if (key.compareTo(node.key) == 0) {
                 size--;
-                if (rootNode.left != null && rootNode.right != null) {
-                    leftExistRightExist(key,rootNode, parent);
+                if (node.left != null && node.right != null) {
+                    leftExistRightExist(key, node, parent);
+                    return;
                 }
-                if (rootNode.left != null && rootNode.right == null) {
-                    leftExistRightMissing(key,rootNode, parent);
+                if (node.left != null && node.right == null) {
+                    leftExistRightMissing(key, node, parent);
+                    return;
                 }
-                if (rootNode.left == null && rootNode.right != null) {
-                    leftMissingRightExist(key, rootNode, parent);
+                if (node.left == null && node.right != null) {
+                    leftMissingRightExist(key, node, parent);
+                    return;
                 }
-                if (rootNode.left == null && rootNode.right == null) {
-                    leftMissingRightMissing(key,rootNode, parent);
+                if (node.left == null && node.right == null) {
+                    leftMissingRightMissing(key, node, parent);
+                    return;
                 }
             } else {
-                parent = rootNode;
-                rootNode = (key.compareTo(rootNode.key) == -1) ? rootNode.left : rootNode.right;
+                parent = node;
+                node = (key.compareTo(node.key) == -1) ? node.left : node.right;
             }
         }
         throw new NotFoundElementToTreeException(key.toString());
@@ -193,7 +196,7 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
             if (node == null) {
                 return;
             }
-            array.addLast((V)node.value);
+            array.addLast((V) node.value);
             addAllArray(node.left);
             addAllArray(node.right);
         }
@@ -229,7 +232,7 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
             outputStream.writeObject(size);
             writeToFileTree(outputStream, root);
             outputStream.close();
-            System.out.println("Tree complete writed to file");
+            System.out.println("\n Tree complete writed to file, " + size + " - node writed\n");
         } catch (IOException e) {
             throw new WritingToFileException(e.getMessage());
         }
@@ -242,8 +245,32 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
         outputStream.writeObject(node);
         writeToFileTree(outputStream, node.left);
         writeToFileTree(outputStream, node.right);
+        return;
     }
 
+    public void readFromFile(File file) {
+        if (file == null || !file.exists()) {
+            return;
+        }
+        LinkedList<K> list = new LinkedList<K>();
+        try {
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file));
+            int sizeT = (Integer) inputStream.readObject();
+            Node node;
+
+            for (int i = 0; i < sizeT; i++) {
+                node = (Node) inputStream.readObject();
+                list.add((K) node.key);
+                addElement((K) node.key, (V) node.value);
+            }
+            inputStream.close();
+            System.out.println("\n Tree readed from file, " + sizeT + " - node readed\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }
