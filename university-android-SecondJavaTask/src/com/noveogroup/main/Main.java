@@ -1,7 +1,7 @@
 package com.noveogroup.main;
 
 import com.noveogroup.exception.BinaryTreeException;
-import com.noveogroup.exception.WritingToFileException;
+import com.noveogroup.exception.IOStreamBinaryTreeException;
 import com.noveogroup.model.AndroidPlatform;
 import com.noveogroup.model.IosPlatform;
 import com.noveogroup.model.Phone;
@@ -13,7 +13,7 @@ import java.io.File;
 import java.util.Iterator;
 
 public class Main {
-    public static void main(String[] args) throws BinaryTreeException {
+    public static void main(String[] args) throws BinaryTreeException, IOStreamBinaryTreeException {
         //You can check your implementation here.
         //For example:
 
@@ -49,8 +49,8 @@ public class Main {
             treeFile.writeToFile(file);
             treeFile2 = new BinaryTreeImpl<Integer, TreeElement>();
             treeFile2.readFromFile(file);
-        } catch (WritingToFileException e) {
-            e.printStackTrace();
+        } catch (IOStreamBinaryTreeException e) {
+            throw new IOStreamBinaryTreeException(e.getMessage());
         }
         Iterator<TreeElement> iter = treeFile2.getIterator();
         while (iter.hasNext()) {

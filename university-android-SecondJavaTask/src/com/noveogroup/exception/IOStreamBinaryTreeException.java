@@ -7,7 +7,7 @@ import java.io.IOException;
  */
 public class IOStreamBinaryTreeException extends IOException {
     public IOStreamBinaryTreeException() {
-
+        super("writing or reading exception");
     }
 
     public IOStreamBinaryTreeException(String message) {

@@ -1,13 +1,11 @@
 package com.noveogroup.exception;
 
-import java.io.IOException;
-
 /**
  * Created by serg on 23.02.16.
  */
-public class WritingToFileException extends IOException {
+public class WritingToFileException extends IOStreamBinaryTreeException {
     public WritingToFileException() {
-        super("Writing to file Exception");
+        super("Writing to file exception");
     }
 
     public WritingToFileException(String message) {

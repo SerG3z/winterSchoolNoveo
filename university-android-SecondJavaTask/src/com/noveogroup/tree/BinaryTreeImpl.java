@@ -1,6 +1,8 @@
 package com.noveogroup.tree;
 
+import com.noveogroup.exception.DuplicateKeyException;
 import com.noveogroup.exception.NotFoundElementToTreeException;
+import com.noveogroup.exception.ReadingFromFileException;
 import com.noveogroup.exception.WritingToFileException;
 import com.noveogroup.model.TreeElement;
 
@@ -47,7 +49,7 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
     }
 
     @Override
-    public void addElement(K key, V element) {
+    public void addElement(K key, V element) throws DuplicateKeyException {
         if (key == null || element == null) {
             return;
         }
@@ -75,8 +77,7 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
                         return;
                     }
                 } else {
-                    System.out.println("такой ключ уже есть");
-                    return;
+                    throw new DuplicateKeyException(key.toString());
                 }
             }
         }
@@ -248,7 +249,7 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
         return;
     }
 
-    public void readFromFile(File file) {
+    public void readFromFile(File file) throws ReadingFromFileException, DuplicateKeyException {
         if (file == null || !file.exists()) {
             return;
         }
@@ -261,12 +262,16 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
             for (int i = 0; i < sizeT; i++) {
                 node = (Node) inputStream.readObject();
                 list.add((K) node.key);
-                addElement((K) node.key, (V) node.value);
+                try {
+                    addElement((K) node.key, (V) node.value);
+                } catch (DuplicateKeyException e) {
+                    throw new DuplicateKeyException(e.getMessage());
+                }
             }
             inputStream.close();
             System.out.println("\n Tree readed from file, " + sizeT + " - node readed\n");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ReadingFromFileException(e.getMessage());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
