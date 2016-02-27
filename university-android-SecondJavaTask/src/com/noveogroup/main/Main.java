@@ -20,20 +20,24 @@ public class Main {
         //create BinaryTree
         BinaryTree<Integer, TreeElement> tree = new BinaryTreeImpl<Integer, TreeElement>();
         //add element
-
+        try {
             tree.addElement(10, new Phone("Nokia 3310", 2312));
-            tree.addElement(12, new AndroidPlatform("Nexus 5", 3213));
             tree.addElement(2, new IosPlatform("iphone 5s", 3121));
+            tree.addElement(12, new AndroidPlatform("Nexus 5", 3213));
             tree.addElement(4, new Phone("kirpi4 42", 4343));
             tree.addElement(8, new Phone("alcatel 2", 434234));
             tree.addElement(17, new AndroidPlatform("Red note 3", 43422));
             tree.addElement(21, new IosPlatform("iphone 6 plus", 1312));
             tree.addElement(89, new AndroidPlatform("Galaxy S7", 324234));
-            tree.addElement(-1, new Phone("motorolla 3300", 75756));
+            tree.addElement(9, new Phone("motorolla 3300", 75756));
 
-        tree.removeElement(-1);
-        tree.removeElement(4);
-        tree.removeElement(10);
+            tree.removeElement(9);
+
+        } catch (BinaryTreeException e) {
+            e.printStackTrace();
+        }
+
+
 
         Iterator<TreeElement> iterator = tree.getIterator();
         while (iterator.hasNext()) {

@@ -77,13 +77,14 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
                         return;
                     }
                 } else {
+                    size--;
                     throw new DuplicateKeyException(key.toString());
                 }
             }
         }
     }
 
-    
+
     @Override
     public void removeElement(K key) throws NotFoundElementToTreeException {
         if (key == null) {
@@ -132,7 +133,7 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
             } else {
                 node.right = left.right;
             }
-            node.key = left.key;
+//            node = left;
         }
         size--;
     }
@@ -148,7 +149,7 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
             if (node == null) {
                 return;
             }
-            array.addLast(node.value);
+            array.add(node.value);
             addAllArray(node.left);
             addAllArray(node.right);
         }
@@ -197,14 +198,12 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
         outputStream.writeObject(node);
         writeToFileTree(outputStream, node.left);
         writeToFileTree(outputStream, node.right);
-        return;
     }
 
     public void readFromFile(File file) throws ReadingFromFileException, DuplicateKeyException {
         if (file == null || !file.exists()) {
             return;
         }
-        LinkedList<K> list = new LinkedList<K>();
         try {
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file));
             int sizeT = (Integer) inputStream.readObject();
@@ -212,7 +211,6 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
 
             for (int i = 0; i < sizeT; i++) {
                 node = (Node) inputStream.readObject();
-                list.add(node.key);
                 try {
                     addElement(node.key, node.value);
                 } catch (DuplicateKeyException e) {
