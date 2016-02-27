@@ -20,8 +20,8 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
     private int size;
 
     private class Node implements Serializable {
-        Object key;
-        Object value;
+        K key;
+        V value;
         Node left;
         Node right;
 
@@ -83,70 +83,7 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
         }
     }
 
-    private void leftMissingRightMissing(K key, Node node, Node parent) {
-        if (parent == null) {
-            root = null;
-        } else {
-            if (key.compareTo(parent.key) == -1) {
-                parent.left = null;
-            } else {
-                parent.right = null;
-            }
-        }
-    }
-
-    private void leftExistRightExist(K key, Node node, Node parent) {
-        Node tmp = node.right;
-        Node p = node;
-
-        while (tmp.left != null) {
-            p = tmp;
-            tmp = tmp.left;
-        }
-        if (p != node) {
-            p.left = tmp.right;
-        } else {
-            p.right = tmp.right;
-        }
-
-        tmp.left = node.left;
-        tmp.right = node.right;
-
-        if (parent == null) {
-            root = tmp;
-        } else {
-            if (key.compareTo(parent.key) == -1) {
-                parent.left = tmp;
-            } else {
-                parent.right = tmp;
-            }
-        }
-    }
-
-    private void leftMissingRightExist(K key, Node node, Node parent) {
-        if (parent == null) {
-            root = node.left;
-        } else {
-            if (key.compareTo(parent.key) == -1) {
-                parent.left = node.right;
-            } else {
-                parent.right = node.right;
-            }
-        }
-    }
-
-    private void leftExistRightMissing(K key, Node node, Node parent) {
-        if (parent == null) {
-            root = null;
-        } else {
-            if (key.compareTo(parent.key) == -1) {
-                parent.left = node.left;
-            } else {
-                parent.right = node.left;
-            }
-        }
-    }
-
+    
     @Override
     public void removeElement(K key) throws NotFoundElementToTreeException {
         if (key == null) {
@@ -160,30 +97,44 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
 
         while (node != null) {
             if (key.compareTo(node.key) == 0) {
-                size--;
-                if (node.left != null && node.right != null) {
-                    leftExistRightExist(key, node, parent);
-                    return;
-                }
-                if (node.left != null && node.right == null) {
-                    leftExistRightMissing(key, node, parent);
-                    return;
-                }
-                if (node.left == null && node.right != null) {
-                    leftMissingRightExist(key, node, parent);
-                    return;
-                }
-                if (node.left == null && node.right == null) {
-                    leftMissingRightMissing(key, node, parent);
-                    return;
-                }
+                break;
             } else {
                 parent = node;
                 node = (key.compareTo(node.key) == -1) ? node.left : node.right;
             }
         }
-        throw new NotFoundElementToTreeException(key.toString());
 
+        if (node == null) {
+            throw new NotFoundElementToTreeException(key.toString());
+        }
+
+        if (node.right == null) {
+            if (parent == null) {
+                root = node.left;
+            } else {
+                if (node == parent.left) {
+                    parent.left = node.left;
+                } else {
+                    parent.right = node.left;
+                }
+            }
+        } else {
+            Node left = node.right;
+            parent = null;
+
+            while (left.left != null) {
+                parent = left;
+                left = left.left;
+            }
+
+            if (parent != null) {
+                parent.left = left.right;
+            } else {
+                node.right = left.right;
+            }
+            node.key = left.key;
+        }
+        size--;
     }
 
     private class IteratorImpl implements Iterator<V> {
@@ -197,7 +148,7 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
             if (node == null) {
                 return;
             }
-            array.addLast((V) node.value);
+            array.addLast(node.value);
             addAllArray(node.left);
             addAllArray(node.right);
         }
@@ -261,11 +212,11 @@ public class BinaryTreeImpl<K extends Comparable, V extends TreeElement> impleme
 
             for (int i = 0; i < sizeT; i++) {
                 node = (Node) inputStream.readObject();
-                list.add((K) node.key);
+                list.add(node.key);
                 try {
-                    addElement((K) node.key, (V) node.value);
+                    addElement(node.key, node.value);
                 } catch (DuplicateKeyException e) {
-                    throw new DuplicateKeyException(e.getMessage());
+                    System.out.println("Element " + e.getMessage() + " duplicated !!!");
                 }
             }
             inputStream.close();

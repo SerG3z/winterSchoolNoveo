@@ -16,10 +16,12 @@ public class BubleSort implements Algorithm {
         int j = 0;
         Device tmp;
 
-        if (ascendingSort) {
-            while (swapped) {
-                swapped = false;
-                j++;
+//        избавление от инвариантного ветвления
+
+        while (swapped) {
+            swapped = false;
+            j++;
+            if (ascendingSort) {
                 for (int i = 0; i < devices.length - j; i++) {
                     if (devices[i].getPrice() > devices[i + 1].getPrice()) {
                         tmp = devices[i];
@@ -28,12 +30,7 @@ public class BubleSort implements Algorithm {
                         swapped = true;
                     }
                 }
-            }
-        }
-        else {
-            while (swapped) {
-                swapped = false;
-                j++;
+            } else {
                 for (int i = 0; i < devices.length - j; i++) {
                     if (devices[i].getPrice() < devices[i + 1].getPrice()) {
                         tmp = devices[i];
