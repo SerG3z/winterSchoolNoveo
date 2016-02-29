@@ -3,8 +3,6 @@ package com.noveogroup.producer;
 import com.noveogroup.buffer.Buffer;
 import com.noveogroup.data.Data;
 
-import java.util.Random;
-
 /**
  * Created by serg3z on 24.02.16.
  */
@@ -12,6 +10,8 @@ public class ProducerImpl implements Producer, Runnable {
     private Buffer buffer;
     private static int countProducer = 0;
     private static int indexProducer = 0;
+
+    private volatile boolean stop = false;
 
     public ProducerImpl(Buffer buffer) {
         this.buffer = buffer;
@@ -26,12 +26,14 @@ public class ProducerImpl implements Producer, Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (!stop) {
             buffer.push();
             try {
                 Thread.sleep(700);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
+                System.out.println("producer - exception interrupt");
+                stop = true;
             }
         }
     }

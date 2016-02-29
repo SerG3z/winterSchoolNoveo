@@ -19,7 +19,7 @@ public class BufferImpl implements Buffer {
             try {
                 wait();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
 
@@ -36,7 +36,7 @@ public class BufferImpl implements Buffer {
             try {
                 wait();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
 

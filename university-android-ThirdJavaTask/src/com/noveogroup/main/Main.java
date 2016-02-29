@@ -12,6 +12,5 @@ public class Main {
         Buffer buffer = new BufferImpl();
         (new Thread(new ProducerImpl(buffer))).start();
         (new Thread(new ConsumerImpl(buffer))).start();
-        (new Thread(new ConsumerImpl(buffer))).start();
     }
 }
