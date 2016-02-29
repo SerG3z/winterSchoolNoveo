@@ -50,6 +50,20 @@ public abstract class BaseDevice implements Device {
     }
 
     @Override
+    public void swap(Device b) {
+        String tmpName = null;
+        int tmpPrice = 0;
+
+        tmpName = this.getName();
+        this.setName(b.getName());
+        this.setName(tmpName);
+
+        tmpPrice = this.getPrice();
+        this.setPrice(b.getPrice());
+        b.setPrice(tmpPrice);
+    }
+
+    @Override
     public String toString() {
         return name;
     }

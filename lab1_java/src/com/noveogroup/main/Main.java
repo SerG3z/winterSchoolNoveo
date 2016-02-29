@@ -1,7 +1,6 @@
 package com.noveogroup.main;
 
 import com.noveogroup.algorithm.BubleSort;
-import com.noveogroup.algorithm.InsertSort;
 import com.noveogroup.algorithm.QuickSort;
 import com.noveogroup.device.Device;
 import com.noveogroup.device.Laptop;
@@ -27,14 +26,15 @@ public class Main {
         System.out.println("\nafter - 1");
         showArrayDevice(devices);
 
-        InsertSort insertSort = new InsertSort();
-        insertSort.sort(devices, false);
+//        InsertSort insertSort = new InsertSort();
+//        insertSort.sort(devices, false);
+        QuickSort quickSort = new QuickSort();
+        quickSort.sort(devices, false);
 
 
         System.out.println("\nafter - 2");
         showArrayDevice(devices);
 
-        QuickSort quickSort = new QuickSort();
         quickSort.sort(devices, true);
 
         System.out.println("\nafter - 3");

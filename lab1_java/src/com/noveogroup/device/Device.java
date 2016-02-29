@@ -14,4 +14,6 @@ public interface Device extends Comparable<Device> {
     void setName(String name);
 
     void showDevice();
+
+    void swap(Device b);
 }

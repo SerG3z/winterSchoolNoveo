@@ -13,4 +13,5 @@ public interface Algorithm {
      * @param ascendingSort true for ascending sort, false for descending sort.
      */
     void sort(Device[] devices, boolean ascendingSort);
+
 }
