@@ -1,7 +1,7 @@
 package com.noveogroup.producer;
 
 import com.noveogroup.buffer.Buffer;
-import com.noveogroup.data.Data;
+import com.noveogroup.data.Laptop;
 
 /**
  * Created by serg3z on 24.02.16.
@@ -10,6 +10,7 @@ public class ProducerImpl implements Producer, Runnable {
     private Buffer buffer;
     private static int countProducer = 0;
     private static int indexProducer = 0;
+    private static int i = 0;
 
     private volatile boolean stop = false;
 
@@ -20,21 +21,14 @@ public class ProducerImpl implements Producer, Runnable {
     }
 
     @Override
-    public Data produceData() {
-        return null;
+    public void produceData() {
+        Laptop str = new Laptop("asus" + i);
+        i++;
+        buffer.push(str);
     }
 
     @Override
     public void run() {
-        while (!stop) {
-            buffer.push();
-            try {
-                Thread.sleep(700);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                System.out.println("producer - exception interrupt");
-                stop = true;
-            }
-        }
+        produceData();
     }
 }

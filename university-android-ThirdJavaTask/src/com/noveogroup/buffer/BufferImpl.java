@@ -1,25 +1,27 @@
 package com.noveogroup.buffer;
 
+import com.noveogroup.data.Data;
+
 import java.util.LinkedList;
 
 /**
  * Created by serg3z on 24.02.16.
  */
-public class BufferImpl implements Buffer {
+public class BufferImpl implements Buffer<Data> {
 
-    private String message;
-    private static int i = 0;
+    private Data message;
 
-    private LinkedList<String> list = new LinkedList<String>();
+    private LinkedList<Data> list = new LinkedList<Data>();
 
     @Override
-    public synchronized String pop() {
+    public synchronized Data pop() {
 
         while (list.size()<=0) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
+                return null;
             }
         }
 
@@ -30,20 +32,18 @@ public class BufferImpl implements Buffer {
     }
 
     @Override
-    public synchronized void push() {
+    public synchronized void push(Data data) {
 
         while (list.size() >= 5) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
+                return;
             }
         }
-
-        this.message = "new record - " + i;
-        i++;
-        list.addLast(message);
+        list.addLast(data);
         notifyAll();
-        System.out.println("create " + this.message + " size - " + list.size());
+        System.out.println("create " + data.getName() + " size - " + list.size());
     }
 }

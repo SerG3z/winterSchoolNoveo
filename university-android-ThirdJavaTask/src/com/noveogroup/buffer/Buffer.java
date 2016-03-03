@@ -3,8 +3,8 @@ package com.noveogroup.buffer;
 /**
  * Data buffer.
  */
-public interface Buffer {
-    public String pop();
+public interface Buffer<T> {
+    public T pop();
 
-    public void push();
+    public void push(T data);
 }
