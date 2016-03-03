@@ -1,21 +1,17 @@
 package com.noveogroup.algorithm;
 
 import com.noveogroup.device.Device;
-import com.noveogroup.device.Laptop;
 
 /**
  * Created by serg on 12.02.16.
  */
 public class QuickSort implements Algorithm {
 
-    private static Device[] dev = new Device[1];
-
     @Override
-    public synchronized void sort(Device[] devices, boolean ascendingSort) {
+    public void sort(Device[] devices, boolean ascendingSort) {
         if (devices == null) {
             return;
         }
-        dev[0] = new Laptop(1, "s");
         int startIndex = 0;
         int endIndex = devices.length - 1;
 
@@ -26,7 +22,7 @@ public class QuickSort implements Algorithm {
         }
     }
 
-    private static void doSortAscending(Device[] devices, int start, int end) {
+    private void doSortAscending(Device[] devices, int start, int end) {
         if (start >= end)
             return;
         int i = start, j = end;
@@ -50,7 +46,7 @@ public class QuickSort implements Algorithm {
         doSortAscending(devices, cur + 1, end);
     }
 
-    private static void doSortDescending(Device[] devices, int start, int end) {
+    private void doSortDescending(Device[] devices, int start, int end) {
         if (start >= end)
             return;
         int i = start, j = end;

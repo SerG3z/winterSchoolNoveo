@@ -8,7 +8,7 @@ import com.noveogroup.device.Device;
 public class BubleSort implements Algorithm {
 
     @Override
-    public synchronized void sort(Device[] devices, boolean ascendingSort) {
+    public void sort(Device[] devices, boolean ascendingSort) {
         if (devices == null) {
             return;
         }
