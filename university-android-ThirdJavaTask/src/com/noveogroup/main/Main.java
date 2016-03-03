@@ -16,7 +16,7 @@ public class Main {
 
         Thread[] threadP = new Thread[nProd];
         for (int i = 0; i < nProd; i++) {
-            synchronized (threadP[i] = new Thread( new ProducerImpl(buffer))) {}
+            threadP[i] = new Thread( new ProducerImpl(buffer));
             threadP[i].start();
         }
 
