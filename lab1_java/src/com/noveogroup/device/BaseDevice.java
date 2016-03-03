@@ -18,7 +18,7 @@ public abstract class BaseDevice implements Device {
     }
 
     @Override
-    public synchronized void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -34,7 +34,7 @@ public abstract class BaseDevice implements Device {
     }
 
     @Override
-    public synchronized void setPrice(int price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
