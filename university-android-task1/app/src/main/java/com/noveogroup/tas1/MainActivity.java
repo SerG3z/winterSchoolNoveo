@@ -49,7 +49,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         int Day = 1;
 
         String str = Date.getText().toString();
-        String[] tmp = str.split("/");
+        String[] tmp = str.split("-");
         if (tmp.length == 3) {
             Day = Integer.parseInt(tmp[0]);
             Mounth = Integer.parseInt(tmp[1]);
