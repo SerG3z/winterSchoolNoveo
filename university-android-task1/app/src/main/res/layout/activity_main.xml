@@ -12,7 +12,7 @@
         android:id="@+id/Name"
         android:layout_gravity="center_horizontal"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="@dimen/margin50"
         />
 
     <EditText
@@ -25,11 +25,11 @@
         android:layout_gravity="center_horizontal"
         android:layout_below="@id/Name"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="@dimen/margin20"
         />
 
     <TextView
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="@dimen/margin35"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/dataBorn"
@@ -38,7 +38,7 @@
         android:clickable="true"
         android:onClick="onclick"
         android:text="@string/click_button_date"
-        android:textSize="16sp"
+        android:textSize="@dimen/sizeText16"
         />
 
     <Button
