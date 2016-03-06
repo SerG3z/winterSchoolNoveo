@@ -13,27 +13,28 @@ import com.noveogroup.task1.R;
 
 import java.util.Calendar;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by serg on 28.02.16.
  */
 public class MainActivity extends Activity implements View.OnClickListener {
 
-    EditText Name;
-    EditText SecondName;
-    TextView Date;
-    Button btnNextActivity;
+    @Bind(R.id.dataBorn) TextView Date;
+    @Bind(R.id.Name) TextView Name;
+    @Bind(R.id.Famil) TextView SecondName;
+    @Bind(R.id.buttonNextActivity) TextView btnNextActivity;
+
     DialogFragment newFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Date = (TextView) findViewById(R.id.dataBorn);
 
-        Name = (EditText) findViewById(R.id.Name);
-        SecondName = (EditText) findViewById(R.id.Famil);
+        ButterKnife.bind(this);
 
-        btnNextActivity = (Button) findViewById(R.id.buttonNextActivity);
         btnNextActivity.setOnClickListener(this);
     }
 
