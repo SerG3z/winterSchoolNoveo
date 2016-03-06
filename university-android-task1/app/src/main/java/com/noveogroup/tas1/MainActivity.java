@@ -22,9 +22,9 @@ import butterknife.ButterKnife;
 public class MainActivity extends Activity implements View.OnClickListener {
 
     @Bind(R.id.dataBorn) TextView Date;
-    @Bind(R.id.Name) TextView Name;
-    @Bind(R.id.Famil) TextView SecondName;
-    @Bind(R.id.buttonNextActivity) TextView btnNextActivity;
+    @Bind(R.id.Name) EditText Name;
+    @Bind(R.id.Famil) EditText SecondName;
+    @Bind(R.id.buttonNextActivity) Button btnNextActivity;
 
     DialogFragment newFragment;
 
@@ -65,9 +65,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
             return 0;
         }
         age = age - Year;
-        if (mount < Mounth-1) {
+        if (mount < Mounth - 1) {
             age--;
-        } else if (mount == Mounth-1) {
+        } else if (mount == Mounth - 1) {
             if (day < Day) {
                 age--;
             }
