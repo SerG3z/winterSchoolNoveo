@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Задача 1</string>
-
+    <string name="field_name">Имя</string>
+    <string name="field_second_name">Фамилия</string>
+    <string name="click_button_date">Нажми на меня чтобы выбрать дату</string>
+    <string name="go_to_new_activity">Далее</string>
 </resources>
