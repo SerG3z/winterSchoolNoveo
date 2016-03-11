@@ -9,38 +9,75 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Information : "/>
+        android:layout_marginTop="5dp"
+        android:text="Information : " />
 
-    <TextView
-        android:id="@+id/name_header"
+    <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="@string/name"
-        android:layout_marginLeft="5dp"/>
+        android:layout_marginLeft="5dp">
 
-    <TextView
-        android:id="@+id/surname_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="@string/surname"
-        android:layout_marginLeft="5dp"/>
+        <TableRow android:layout_marginBottom="5dp">
 
-    <TextView
-        android:id="@+id/skills_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="@string/skills"
-        android:layout_marginLeft="5dp"/>
+            <TextView
+                android:id="@+id/title_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:text="@string/name_title" />
+
+            <TextView
+                android:id="@+id/name_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name" />
+        </TableRow>
+
+
+        <TableRow android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/title_surname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/surname_title" />
+
+            <TextView
+                android:id="@+id/surname_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/surname" />
+        </TableRow>
+
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/title_skills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/skills_title" />
+
+            <EditText
+                android:id="@+id/skills_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:cursorVisible="false"
+                android:editable="false"
+                android:text="@string/skills"
+                android:textSize="14sp" />
+        </TableRow>
+
+
+    </TableLayout>
+
 
     <Button
+        android:id="@+id/edit_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_edit"
-        android:id="@+id/button"
         android:layout_gravity="right"
-        />
+        android:text="@string/btn_edit" />
 
 </LinearLayout>
