@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.method.KeyListener;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,13 +21,13 @@ public class MainActivity extends Activity {
 
     static boolean tap = true;
     static boolean tap2 = true;
+    List<Employee> employees = new ArrayList<>();;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final List<Employee> employees = new ArrayList<>();
         listemployeeInit(employees);
 
         final ListView listView = (ListView) findViewById(R.id.listEmployee);
@@ -122,11 +123,19 @@ public class MainActivity extends Activity {
                 }
             }
         });
-
-
-
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+//        outState.putParcelableArrayList("array", (ArrayList<? extends Parcelable>) employees);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+//        employees = savedInstanceState.getStringArray("array");
+    }
 
     private void listemployeeInit(List<Employee> employees) {
         final String name = "Name ";
