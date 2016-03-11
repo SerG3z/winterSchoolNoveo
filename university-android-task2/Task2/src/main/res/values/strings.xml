@@ -2,8 +2,11 @@
 <resources>
 
     <string name="app_name">Task2</string>
+
+    <string name="name">Name</string>
     <string name="surname">Surname</string>
     <string name="skills">Skills</string>
+    <string name="btn_edit">Edit</string>
 
     <string name="toast_message">Item %s was clicked</string>
 

@@ -4,21 +4,67 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}">
 
-    <View
-        android:id="@+id/info"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:clickable="true"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="Informatoin"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/name_land"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/name" />
+
+        <TextView
+            android:id="@+id/surname_land"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/surname" />
+
+        <TextView
+            android:id="@+id/skills_land"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/skills" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_edit"
+            android:id="@+id/edit_land"
+            android:layout_gravity="right" />
+    </LinearLayout>
 
     <ListView
+        android:id="@+id/listEmployee"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listEmployee"
-        android:layout_weight="2"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="2"
+
+        />
 
 
 </LinearLayout>
