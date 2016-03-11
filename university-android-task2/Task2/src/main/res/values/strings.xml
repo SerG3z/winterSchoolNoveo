@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Task2</string>
+    <string name="surname">Surname</string>
+    <string name="skills">Skills</string>
+
+    <string name="toast_message">Item %s was clicked</string>
+
+
+</resources>
