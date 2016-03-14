@@ -1,11 +1,14 @@
 package com.noveogroup.tas1;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,18 +19,22 @@ import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by serg on 28.02.16.
  */
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends Activity {
 
     @Bind(R.id.dataBorn) TextView dateTextView;
     @Bind(R.id.Name) EditText nameEditText;
     @Bind(R.id.Famil) EditText secondNameEditText;
-    @Bind(R.id.buttonNextActivity) Button btnNextActivity;
+
 
     DialogFragment newFragment;
+
+    final String DATEBORN_KEY = "dateKey";
+    final String DATAPICKER_KEY = "datePicker";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,60 +42,76 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
-
-        btnNextActivity.setOnClickListener(this);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
 
+    @OnClick(R.id.buttonNextActivity)
+    public void BtnNextActivity(){
+        final int age = counterAge();
+        if (validationDate(age)){
+
+            Intent intent = SecondActvity.createIntent(
+                    nameEditText.getText().toString(),
+                    secondNameEditText.getText().toString(),
+                    String.valueOf(age));
+
+            startActivity(intent);
+        }
+    }
+
+    @OnClick(R.id.dataBorn)
     public void onClickDate(View view) {
-        newFragment = new DatePickerFragment(view);
-        newFragment.show(getFragmentManager(), "datePicker");
+        newFragment = new DatePickerFragment();
+        newFragment.show(getFragmentManager(), DATAPICKER_KEY);
+
     }
+
+
+    final DatePickerDialog.OnDateSetListener myCallBack = new DatePickerDialog.OnDateSetListener() {
+
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            dateTextView.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+        }
+    };
 
     private int counterAge() {
         int year = 2016;
-        int mounth = 1;
+        int month = 1;
         int day = 1;
 
         String str = dateTextView.getText().toString();
         String[] tmp = str.split("-");
         if (tmp.length == 3) {
             day = Integer.parseInt(tmp[0]);
-            mounth = Integer.parseInt(tmp[1]);
+            month = Integer.parseInt(tmp[1]);
             year = Integer.parseInt(tmp[2]);
         } else {
             return -1;
         }
 
         final Calendar calendar = Calendar.getInstance();
-        final int curentMounth = calendar.get(Calendar.MONTH);
+        final int currentMonth = calendar.get(Calendar.MONTH);
         final int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
         final int currentYear = calendar.get(Calendar.YEAR);
         int age = currentYear - year;
 
-
-        if (curentMounth < mounth - 1) {
+        if (currentMonth < month - 1) {
                 age--;
-            } else if (curentMounth == mounth - 1) {
-                if (currentDay < day) {
-                    age--;
-                }
+        } else if (currentMonth == month - 1) {
+            if (currentDay < day) {
+                age--;
             }
-
-            return age;
         }
 
-        @Override
-    public void onClick(View v) {
-        final int age = counterAge();
-        if (validationDate(age)){
-            Intent intent = new Intent(this, SecondActvity.class);
-            intent.putExtra("nameEditText", nameEditText.getText().toString());
-            intent.putExtra("secondNameEditText", secondNameEditText.getText().toString());
-            intent.putExtra("dateTextView", String.valueOf(age));
-            startActivity(intent);
-        }
+        return age;
     }
+
 
     private boolean validationDate(final int age){
         if (nameEditText.getText().toString().equals("")){
@@ -108,12 +131,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("dateTextView", dateTextView.getText().toString());
+        outState.putString(DATEBORN_KEY, dateTextView.getText().toString());
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        dateTextView.setText(savedInstanceState.getString("dateTextView"));
+        dateTextView.setText(savedInstanceState.getString(DATEBORN_KEY));
     }
 }
