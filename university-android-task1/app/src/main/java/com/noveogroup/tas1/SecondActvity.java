@@ -29,9 +29,9 @@ public class SecondActvity extends Activity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        Name.setText(intent.getStringExtra("name"));
-        SecondName.setText(intent.getStringExtra("secondName"));
-        Date.setText(intent.getStringExtra("date"));
+        Name.setText(intent.getStringExtra("nameEditText"));
+        SecondName.setText(intent.getStringExtra("secondNameEditText"));
+        Date.setText(intent.getStringExtra("dateTextView"));
 
     }
 }

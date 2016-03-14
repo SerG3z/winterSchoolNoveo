@@ -4,24 +4,22 @@
     tools:context=".MainActivity">
 
     <EditText
+        android:id="@+id/Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:hint="@string/field_name"
-        android:ems="10"
-        android:id="@+id/Name"
         android:layout_gravity="center_horizontal"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin50"
         />
 
     <EditText
+        android:id="@+id/Famil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:hint="@string/field_second_name"
-        android:ems="10"
-        android:id="@+id/Famil"
         android:layout_gravity="center_horizontal"
         android:layout_below="@id/Name"
         android:layout_centerHorizontal="true"
@@ -29,24 +27,24 @@
         />
 
     <TextView
-        android:layout_marginBottom="@dimen/margin35"
+        android:id="@+id/dataBorn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/dataBorn"
+        android:layout_marginBottom="@dimen/margin35"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/Famil"
+        android:layout_below="@id/Famil"
         android:clickable="true"
-        android:onClick="onclick"
+        android:onClick="onClickDate"
         android:text="@string/click_button_date"
         android:textSize="@dimen/sizeText16"
         />
 
     <Button
+        android:id="@+id/buttonNextActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/go_to_new_activity"
-        android:id="@+id/buttonNextActivity"
-        android:layout_below="@+id/dataBorn"
+        android:layout_below="@id/dataBorn"
         android:layout_centerHorizontal="true" />
 
 
