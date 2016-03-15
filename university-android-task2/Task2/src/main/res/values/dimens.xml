@@ -4,5 +4,10 @@
     <dimen name="common_margin">10dp</dimen>
     <dimen name="view_height">200dp</dimen>
     <dimen name="compound_drawable_size">20dp</dimen>
+    <dimen name="margin10">10dp</dimen>
+    <dimen name="margin5">5dp</dimen>
+    <dimen name="margin60">60dp</dimen>
+    <dimen name="textSizeActivityLand">14dp</dimen>
+
 
 </resources>
