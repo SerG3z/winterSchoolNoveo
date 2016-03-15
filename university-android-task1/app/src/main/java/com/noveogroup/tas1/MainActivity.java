@@ -2,12 +2,8 @@ package com.noveogroup.tas1;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,8 +26,7 @@ public class MainActivity extends Activity {
     @Bind(R.id.Name) EditText nameEditText;
     @Bind(R.id.Famil) EditText secondNameEditText;
 
-
-    DialogFragment newFragment;
+    DatePickerFragment newFragment;
 
     final String DATEBORN_KEY = "dateKey";
     final String DATAPICKER_KEY = "datePicker";
@@ -55,35 +50,38 @@ public class MainActivity extends Activity {
         final int age = counterAge();
         if (validationDate(age)){
 
+            final String nameSend = nameEditText.getText().toString();
+            final String secondNameSend = secondNameEditText.getText().toString();
+            final String ageSend = String.valueOf(age);
+
             Intent intent = SecondActvity.createIntent(
-                    nameEditText.getText().toString(),
-                    secondNameEditText.getText().toString(),
-                    String.valueOf(age));
+                    this,
+                    nameSend,
+                    secondNameSend,
+                    ageSend);
 
             startActivity(intent);
         }
     }
 
-    @OnClick(R.id.dataBorn)
-    public void onClickDate(View view) {
-        newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(), DATAPICKER_KEY);
 
+    @OnClick(R.id.dataBorn)
+    public void onClickDate() {
+        newFragment = new DatePickerFragment();
+        newFragment.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(final DatePicker datePicker, final int year, final int monthOfYear, final int dayOfMonth) {
+                dateTextView.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+            }
+        });
+        newFragment.show(getFragmentManager(), DATAPICKER_KEY);
     }
 
-
-    final DatePickerDialog.OnDateSetListener myCallBack = new DatePickerDialog.OnDateSetListener() {
-
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            dateTextView.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-        }
-    };
-
     private int counterAge() {
-        int year = 2016;
-        int month = 1;
-        int day = 1;
+
+        final int year;
+        final int month;
+        final int day;
 
         String str = dateTextView.getText().toString();
         String[] tmp = str.split("-");
@@ -108,19 +106,26 @@ public class MainActivity extends Activity {
                 age--;
             }
         }
-
         return age;
     }
 
 
     private boolean validationDate(final int age){
         if (nameEditText.getText().toString().equals("")){
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    getApplicationContext().getResources().getString(R.string.error_field_name),
+                    Toast.LENGTH_SHORT);
+            toast.show();
             return false;
         } else if (secondNameEditText.getText().toString().equals("")){
-            return false;
-        } else if (age < 0) {
             Toast toast = Toast.makeText(getApplicationContext(),
-                    getApplicationContext().getResources().getString(R.string.error_age),
+                    getApplicationContext().getResources().getString(R.string.error_field_secondname),
+                    Toast.LENGTH_SHORT);
+            toast.show();
+            return false;
+        } else if (age <= 0) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    getApplicationContext().getResources().getString(R.string.error_field_age),
                     Toast.LENGTH_SHORT);
             toast.show();
             return false;

@@ -5,6 +5,7 @@
     <string name="click_button_date">Нажми, чтобы выбрать дату рождения</string>
     <string name="go_to_new_activity">Далее</string>
     <string name="age">Возраст</string>
-    <string name="error_age">Ошибка неверная дата рождения</string>
-
+    <string name="error_field_age">Ошибка, неверная дата рождения</string>
+    <string name="error_field_name">Ошибка, поле "Имя" не должно быть пустым</string>
+    <string name="error_field_secondname">Ошибка, поле "Фамилия" не должно быть пустым</string>
 </resources>

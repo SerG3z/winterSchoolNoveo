@@ -5,7 +5,9 @@
     <string name="click_button_date">click to select date born</string>
     <string name="go_to_new_activity">Next</string>
     <string name="age">Age</string>
-    <string name="error_age">Error wrong date born</string>
+    <string name="error_field_age">Error wrong date born</string>
+    <string name="error_field_name">Error field "Name" empty</string>
+    <string name="error_field_secondname">Error field "SecondName" empty</string>
 
 
 </resources>

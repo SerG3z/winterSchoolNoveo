@@ -3,6 +3,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <EditText
         android:id="@+id/Name"
         android:layout_width="wrap_content"
@@ -45,6 +46,5 @@
         android:text="@string/go_to_new_activity"
         android:layout_below="@id/dataBorn"
         android:layout_centerHorizontal="true" />
-
 
 </RelativeLayout>

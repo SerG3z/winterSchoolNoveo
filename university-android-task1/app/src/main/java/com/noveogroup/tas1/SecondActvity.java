@@ -1,15 +1,12 @@
 package com.noveogroup.tas1;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.view.Window;
 import android.widget.TextView;
 
 import com.noveogroup.task1.R;
-
-import java.util.AbstractCollection;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -19,9 +16,9 @@ import butterknife.ButterKnife;
  */
 public class SecondActvity extends Activity {
 
-    @Bind(R.id.NameS) TextView Name;
-    @Bind(R.id.SecondName) TextView SecondName;
-    @Bind(R.id.Date) TextView Date;
+    @Bind(R.id.NameS) TextView nameTextView;
+    @Bind(R.id.SecondName) TextView secondNameTextView;
+    @Bind(R.id.Date) TextView dateTextView;
 
     private final static String NAME_KEY = "nameKey";
     private final static String SECONDNAME_KEY = "secondNamekey";
@@ -33,15 +30,18 @@ public class SecondActvity extends Activity {
         setContentView(R.layout.activity_second);
 
         ButterKnife.bind(this);
-
-        Intent intent = getIntent();
-        Name.setText(intent.getStringExtra(NAME_KEY));
-        SecondName.setText(intent.getStringExtra(SECONDNAME_KEY));
-        Date.setText(intent.getStringExtra(DATEBORN_KEY));
+        initializationIntent();
     }
 
-    public static Intent createIntent(String name, String secondName, String age) {
-        Intent intent = new Intent();
+    private void initializationIntent(){
+        Intent intent = getIntent();
+        nameTextView.setText(intent.getStringExtra(NAME_KEY));
+        secondNameTextView.setText(intent.getStringExtra(SECONDNAME_KEY));
+        dateTextView.setText(intent.getStringExtra(DATEBORN_KEY));
+    }
+
+    public static Intent createIntent(Context context, String name, String secondName, String age) {
+        Intent intent = new Intent(context, SecondActvity.class);
         intent.putExtra(NAME_KEY, name);
         intent.putExtra(SECONDNAME_KEY, secondName);
         intent.putExtra(DATEBORN_KEY, age);
