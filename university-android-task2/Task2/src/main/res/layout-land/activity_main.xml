@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/margin10"
-            android:text="Informatoin"
+            android:text="@string/information"
             android:textStyle="bold"/>
 
         <TableLayout
@@ -76,7 +76,9 @@
                     android:cursorVisible="false"
                     android:editable="false"
                     android:text="@string/skills"
-                    android:textSize="@dimen/textSizeActivityLand"/>
+                    android:textSize="@dimen/textSizeActivityLand"
+                    android:textColor="@drawable/my_custom_edittext"
+                    />
             </TableRow>
 
         </TableLayout>

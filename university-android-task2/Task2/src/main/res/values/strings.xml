@@ -10,6 +10,14 @@
     <string name="surname_title">Surname : </string>
     <string name="skills_title">Skills : </string>
     <string name="btn_edit">Edit</string>
+    <string name="information">Information</string>
+
+    <string name="name_list">Name %d</string>
+    <string name="surname_list">SurName %d</string>
+    <string name="skills_list">Skills %d</string>
+
+    <color name="colorEditTextBeforeClick">#bebebe</color>
+    <color name="colorEditTextAfterClick">#fff</color>
 
     <string name="toast_message">Item %s was clicked</string>
 

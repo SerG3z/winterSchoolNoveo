@@ -30,6 +30,6 @@
         android:layout_below="@id/name"
         android:layout_marginTop="@dimen/common_margin"
         android:text="@string/skills"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/secondary_text_dark" />
 
 </RelativeLayout>

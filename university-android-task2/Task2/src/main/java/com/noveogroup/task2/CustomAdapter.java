@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by serg on 10.03.16.
  */
@@ -43,12 +46,7 @@ public class CustomAdapter extends BaseAdapter {
 
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_employee, parent, false);
-
-            holder = new ViewHolder();
-            holder.name = (TextView) convertView.findViewById(R.id.name);
-            holder.surname = (TextView) convertView.findViewById(R.id.surname);
-            holder.skills = (TextView) convertView.findViewById(R.id.skills);
-
+            holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         }
 
@@ -63,9 +61,13 @@ public class CustomAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private class ViewHolder {
-        private TextView name;
-        private TextView surname;
-        private TextView skills;
+    class ViewHolder {
+        @Bind(R.id.name) TextView name;
+        @Bind(R.id.surname) TextView surname;
+        @Bind(R.id.skills) TextView skills;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }
