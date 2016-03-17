@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="@dimen/relative_layout_padding">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/relative_layout_padding"
+    >
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:textColor="@android:color/white" />
+        android:layout_marginLeft="@dimen/margin20"
+        android:layout_marginTop="@dimen/margin10"
+        android:text="@string/name"
+        android:layout_centerVertical="true"
+        android:textColor="@android:color/white"/>
 
     <TextView
         android:id="@+id/surname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/name"
-        android:layout_marginTop="@dimen/common_margin"
+        android:layout_toRightOf="@id/name"
+        android:layout_marginLeft="@dimen/margin80"
         android:text="@string/surname"
-        android:textColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/skills"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/name"
-        android:layout_marginTop="@dimen/common_margin"
-        android:text="@string/skills"
-        android:textColor="@android:color/white" />
+        android:layout_centerVertical="true"
+        android:textColor="@android:color/white"
+        />
 
 </RelativeLayout>

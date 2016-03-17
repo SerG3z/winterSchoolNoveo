@@ -56,7 +56,6 @@ public class CustomAdapter extends BaseAdapter {
 
         holder.name.setText(item.getName());
         holder.surname.setText(item.getSurname());
-        holder.skills.setText(item.getSkills());
 
         return convertView;
     }
@@ -64,7 +63,6 @@ public class CustomAdapter extends BaseAdapter {
     class ViewHolder {
         @Bind(R.id.name) TextView name;
         @Bind(R.id.surname) TextView surname;
-        @Bind(R.id.skills) TextView skills;
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);

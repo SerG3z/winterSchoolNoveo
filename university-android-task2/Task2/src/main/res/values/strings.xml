@@ -16,6 +16,9 @@
     <string name="surname_list">SurName %d</string>
     <string name="skills_list">Skills %d</string>
 
+    <string name="edit_button_ok">Ok</string>
+    <string name="edit_button_edit">Edit</string>
+
     <color name="colorEditTextBeforeClick">#bebebe</color>
     <color name="colorEditTextAfterClick">#fff</color>
 

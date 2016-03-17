@@ -1,15 +1,11 @@
 package com.noveogroup.task2;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -17,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +24,15 @@ import butterknife.OnItemClick;
 
 public class MainActivity extends Activity {
 
-    private static boolean tap  = true;
-    private static boolean tap2 = true;
+    private boolean tap = true;
 
-    private List<Employee> employees = new ArrayList<>();
-    private static Employee itemEmployee = null;
+    private int orientation;
+    private static Employee showItemEmployee = null;
+    private final String itemEmployeeKey = "itemEmployeeKey";
+    private final String listEmployeeKey = "listEmployeeKey";
     private ViewHolder holder;
     private static int positionInListView;
-    private int orientation;
+    private List<Employee> employees = new ArrayList<>();
 
     private static InputMethodManager inputMethodManager;
 
@@ -57,7 +53,7 @@ public class MainActivity extends Activity {
         listEmployeeInit(employees);
 
         final View inflate = LayoutInflater.from(this).inflate(R.layout.header, employeeListView, false);
-        holder = new ViewHolder(inflate, employees);
+        holder = new ViewHolder(inflate);
 
         orientation = this.getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -68,8 +64,8 @@ public class MainActivity extends Activity {
 
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        if (itemEmployee != null) {
-            fillFieldMoreInfo(itemEmployee);
+        if (showItemEmployee != null) {
+            fillFieldMoreInfo(showItemEmployee);
         }
     }
 
@@ -80,8 +76,7 @@ public class MainActivity extends Activity {
     }
 
     private static Employee fillItemEmployee(String name, String surname, String skills) {
-        Employee itemEmployee = new Employee(name, surname, skills);
-        return itemEmployee;
+        return  new Employee(name, surname, skills);
     }
 
     private void fillFieldMoreInfo(Employee tmpEmployee) {
@@ -98,38 +93,59 @@ public class MainActivity extends Activity {
 
 
 
+    private void cickNewEmployee() {
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            breakEditTextAndKeyboard(holder.skillsTextView, holder.editButton);
+        } else {
+            breakEditTextAndKeyboard(skillsLandTextView, editLandButton);
+        }
+    }
+
+    private void breakEditTextAndKeyboard(TextView tmpSkillsTextView, Button tmpEditButton) {
+        employees.get(MainActivity.positionInListView).setSkills(tmpSkillsTextView.getText().toString());
+        tmpSkillsTextView.setEnabled(false);
+        tmpSkillsTextView.setCursorVisible(false);
+        tmpSkillsTextView.setKeyListener(null);
+        tap = true;
+        tmpEditButton.setText(R.string.edit_button_edit);
+        showItemEmployee = employees.get(positionInListView);
+    }
+
+
+    private void showEditTextAndKeyboard(TextView tmpSkillsTextView, Button tmpEditButton) {
+        tmpSkillsTextView.setEnabled(true);
+        tmpSkillsTextView.setCursorVisible(true);
+        tmpSkillsTextView.setKeyListener(new EditText(getApplicationContext()).getKeyListener());
+        tap = false;
+        tmpEditButton.setText(R.string.edit_button_ok);
+        inputMethodManager.showSoftInput(tmpSkillsTextView, InputMethodManager.SHOW_FORCED);
+        tmpSkillsTextView.requestFocus();
+    }
+
     @OnItemClick(R.id.listEmployee)
     public void onItemClickListEmployee(int position) {
         position -= employeeListView.getHeaderViewsCount();
         positionInListView = position;
 
-        final String getingName     = employees.get(position).getName();
-        final String getingSurname  = employees.get(position).getSurname();
-        final String getingSkills   = employees.get(position).getSkills();
+        final String nameStringTmp     = employees.get(position).getName();
+        final String surnameStringTmp  = employees.get(position).getSurname();
+        final String skillsStringTmp   = employees.get(position).getSkills();
 
-        itemEmployee = fillItemEmployee(getingName, getingSurname, getingSkills);
+        showItemEmployee = fillItemEmployee(nameStringTmp, surnameStringTmp, skillsStringTmp);
 
-        fillFieldMoreInfo(itemEmployee);
+        fillFieldMoreInfo(showItemEmployee);
+
+        cickNewEmployee();
+
     }
 
 
     @Nullable @OnClick(R.id.edit_land)
     public void onClickButtonEditLandscape() {
-        if (tap2) {
-            skillsLandTextView.setEnabled(true);
-            skillsLandTextView.setCursorVisible(true);
-            skillsLandTextView.setKeyListener(new EditText(getApplicationContext()).getKeyListener());
-            tap2 = false;
-            editLandButton.setText("Ok");
-            inputMethodManager.showSoftInput(skillsLandTextView, InputMethodManager.SHOW_FORCED);
-            skillsLandTextView.requestFocus();
+        if (tap) {
+            showEditTextAndKeyboard(skillsLandTextView, editLandButton);
         } else {
-            employees.get(positionInListView).setSkills(skillsLandTextView.getText().toString());
-            skillsLandTextView.setEnabled(false);
-            skillsLandTextView.setCursorVisible(false);
-            skillsLandTextView.setKeyListener(null);
-            tap2 = true;
-            editLandButton.setText("Edit");
+            breakEditTextAndKeyboard(skillsLandTextView, editLandButton);
         }
     }
 
@@ -142,36 +158,22 @@ public class MainActivity extends Activity {
         }
     }
 
-    static class ViewHolder {
+     class ViewHolder {
         @Bind(R.id.name_header)     TextView nameTextView;
         @Bind(R.id.surname_header)  TextView surnameTextView;
         @Bind(R.id.skills_header)   EditText skillsTextView;
         @Bind(R.id.edit_header)     Button   editButton;
 
-        private List<Employee> employees = new ArrayList<>();
-
-        public ViewHolder(View view, List<Employee> employees) {
+        public ViewHolder(View view) {
             ButterKnife.bind(this, view);
-            this.employees = employees;
         }
 
         @Nullable @OnClick(R.id.edit_header)
         public void onClickButtonEditPortrait(View view) {
             if (tap) {
-                tap = false;
-                editButton.setText("Ok");
-                skillsTextView.setEnabled(true);
-                skillsTextView.setCursorVisible(true);
-                skillsTextView.setKeyListener(new EditText(view.getContext()).getKeyListener());
-                inputMethodManager.showSoftInput(skillsTextView, InputMethodManager.SHOW_FORCED);
-                skillsTextView.requestFocus();
+                showEditTextAndKeyboard(skillsTextView, editButton);
             } else {
-                tap = true;
-                editButton.setText("Edit");
-                skillsTextView.setEnabled(false);
-                skillsTextView.setCursorVisible(false);
-                skillsTextView.setKeyListener(null);
-                employees.get(MainActivity.positionInListView).setSkills(skillsTextView.getText().toString());
+                breakEditTextAndKeyboard(skillsTextView, editButton);
             }
         }
     }
@@ -179,14 +181,15 @@ public class MainActivity extends Activity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable("itemEmployee", itemEmployee);
-//        outState.putParcelableArray("listEmployee", employees);
+        outState.putParcelable(itemEmployeeKey, showItemEmployee);
+        outState.putParcelableArrayList(listEmployeeKey, (ArrayList<? extends Parcelable>) employees);
+
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-//        employees = savedInstanceState.getParcelableArray("listEmployee");
-        itemEmployee = savedInstanceState.getParcelable("itemEmployee");
+        employees = savedInstanceState.getParcelableArrayList(listEmployeeKey);
+        showItemEmployee = savedInstanceState.getParcelable(itemEmployeeKey);
     }
 }
