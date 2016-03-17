@@ -22,4 +22,6 @@
     <string name="click_rowing">click button rowing</string>
     <string name="click_setting">click button setting</string>
 
+    <string name="tab1">Tab %d</string>
+
 </resources>

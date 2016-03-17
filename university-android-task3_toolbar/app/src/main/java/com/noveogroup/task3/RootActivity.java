@@ -40,6 +40,14 @@ public class RootActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @OnClick(R.id.toolbar_tabs_button)
+    public void onClickToolbarTabs() {
+        Intent intent = new Intent(this, ToolbarTabsActivity.class);
+        startActivity(intent);
+    }
+
+
+
 
     public void dummy(View view) {
         Toast.makeText(this, R.string.dragon, Toast.LENGTH_SHORT).show();

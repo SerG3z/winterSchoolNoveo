@@ -25,6 +25,11 @@
             android:theme="@style/MyTheme"
             >
         </activity>
+        <activity android:name=".ToolbarTabsActivity"
+            android:parentActivityName=".RootActivity"
+            android:theme="@style/MyTheme"
+            >
+        </activity>
     </application>
 
 </manifest>
