@@ -30,6 +30,14 @@
             android:theme="@style/MyTheme"
             >
         </activity>
+        <activity android:name=".ToolbarActionViewActivity"
+            android:parentActivityName=".RootActivity"
+            android:theme="@style/MyTheme">
+        </activity>
+        <activity android:name=".SpinnerActivity"
+            android:parentActivityName=".RootActivity"
+            android:theme="@style/MyTheme">
+        </activity>
     </application>
 
 </manifest>

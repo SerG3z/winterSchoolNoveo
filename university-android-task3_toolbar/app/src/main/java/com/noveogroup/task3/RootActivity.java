@@ -46,7 +46,17 @@ public class RootActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @OnClick(R.id.toolbar_actionview_button)
+    public void onClickToolbarActionView() {
+        Intent intent = new Intent(this, ToolbarActionViewActivity.class);
+        startActivity(intent);
+    }
 
+    @OnClick(R.id.spinner_button)
+    public void onClickSpinnerButton() {
+        Intent intent = new Intent(this, SimpleToolbarActivity.class);
+        startActivity(intent);
+    }
 
 
     public void dummy(View view) {

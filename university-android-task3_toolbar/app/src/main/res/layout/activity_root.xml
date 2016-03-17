@@ -24,8 +24,7 @@
             android:id="@+id/simple_toolbar_up_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/simple_up"
-            android:onClick="dummy"/>
+            android:text="@string/simple_up" />
 
         <Button
             android:layout_width="match_parent"
@@ -41,6 +40,7 @@
             android:onClick="dummy"/>
 
         <Button
+            android:id="@+id/spinner_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/list"
@@ -59,10 +59,10 @@
             android:onClick="dummy"/>
 
         <Button
+            android:id="@+id/toolbar_actionview_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/action"
-            android:onClick="dummy"/>
+            android:text="@string/action" />
 
     </LinearLayout>
 </ScrollView>

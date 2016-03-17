@@ -18,7 +18,7 @@ public class ToolbarTabsActivity extends AppCompatActivity {
 
     public static final int TAB_SIZE = 5;
 
-    @Bind(R.id.simple_toolbar)
+    @Bind(R.id.simple_toolbar_in_tabs)
     Toolbar simpleToolbar;
 
     @Bind(R.id.tabs)

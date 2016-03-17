@@ -1,11 +1,12 @@
 package com.noveogroup.task3;
 
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.support.v7.widget.SearchView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -13,7 +14,7 @@ import butterknife.ButterKnife;
 /**
  * Created by serg on 18.03.16.
  */
-public class ToolbarUpActivity extends AppCompatActivity {
+public class ToolbarActionViewActivity extends AppCompatActivity {
 
     @Bind(R.id.simple_toolbar)
     Toolbar simpleToolbar;
@@ -33,28 +34,23 @@ public class ToolbarUpActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.my_custom_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.room:
-                Toast.makeText(getApplicationContext(), R.string.click_room, Toast.LENGTH_SHORT).show();
-                return true;
-
-            case R.id.rowing:
-                Toast.makeText(getApplicationContext(), R.string.click_rowing, Toast.LENGTH_SHORT).show();
-                return true;
-
-            case R.id.setting:
-                Toast.makeText(getApplicationContext(), R.string.click_setting, Toast.LENGTH_SHORT).show();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     @Override

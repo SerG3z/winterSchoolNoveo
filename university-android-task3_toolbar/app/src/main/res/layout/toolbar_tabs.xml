@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <include android:id="@+id/simple_toolbar"
+    <include android:id="@+id/simple_toolbar_in_tabs"
         layout="@layout/simple_toolbar"/>
 
     <android.support.design.widget.TabLayout

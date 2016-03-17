@@ -11,9 +11,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by serg on 17.03.16.
+ * Created by serg on 18.03.16.
  */
-public class SimpleToolbarActivity extends AppCompatActivity {
+public class SpinnerActivity extends AppCompatActivity {
 
     @Bind(R.id.simple_toolbar)
     Toolbar simpleToolbar;
@@ -43,11 +43,11 @@ public class SimpleToolbarActivity extends AppCompatActivity {
                 return true;
 
             case R.id.rowing:
-            Toast.makeText(getApplicationContext(), R.string.click_rowing, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.click_rowing, Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.setting:
-            Toast.makeText(getApplicationContext(), R.string.click_setting, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.click_setting, Toast.LENGTH_SHORT).show();
                 return true;
 
             default:
@@ -60,4 +60,5 @@ public class SimpleToolbarActivity extends AppCompatActivity {
         super.onDestroy();
         ButterKnife.unbind(this);
     }
+
 }
