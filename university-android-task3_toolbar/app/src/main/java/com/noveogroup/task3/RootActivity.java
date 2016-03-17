@@ -29,8 +29,14 @@ public class RootActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.simple_toolbar_button)
-    public void onClick(){
+    public void onClickSimpleToolbar(){
         Intent intent = new Intent(this, SimpleToolbarActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.simple_toolbar_up_button)
+    public void onClickSimpleToolbarUp() {
+        Intent intent = new Intent(this, ToolbarUpActivity.class);
         startActivity(intent);
     }
 

@@ -20,6 +20,11 @@
         <activity android:name=".SimpleToolbarActivity"
             android:theme="@style/MyTheme">
         </activity>
+        <activity android:name=".ToolbarUpActivity"
+            android:parentActivityName=".RootActivity"
+            android:theme="@style/MyTheme"
+            >
+        </activity>
     </application>
 
 </manifest>
