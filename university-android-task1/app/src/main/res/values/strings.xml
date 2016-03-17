@@ -8,6 +8,5 @@
     <string name="error_field_age">Error wrong date born</string>
     <string name="error_field_name">Error field "Name" empty</string>
     <string name="error_field_secondname">Error field "SecondName" empty</string>
-
-
+    <string formatted="false" name="format_date">%d-%d-%d</string>
 </resources>

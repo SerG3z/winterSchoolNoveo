@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,14 +23,16 @@ import butterknife.OnClick;
  */
 public class MainActivity extends Activity {
 
-    @Bind(R.id.dataBorn) TextView dateTextView;
-    @Bind(R.id.Name) EditText nameEditText;
-    @Bind(R.id.Famil) EditText secondNameEditText;
+    private final static String DATEBORN_KEY = "dateKey";
+    private final static String DATAPICKER_KEY = "datePicker";
 
+    @Bind(R.id.dataBorn)
+    TextView dateTextView;
+    @Bind(R.id.Name)
+    EditText nameEditText;
+    @Bind(R.id.Famil)
+    EditText secondNameEditText;
     DatePickerFragment newFragment;
-
-    final String DATEBORN_KEY = "dateKey";
-    final String DATAPICKER_KEY = "datePicker";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,15 +49,15 @@ public class MainActivity extends Activity {
     }
 
     @OnClick(R.id.buttonNextActivity)
-    public void BtnNextActivity(){
-        final int age = counterAge();
-        if (validationDate(age)){
+    public void onBtnNextClick() {
+        final int age = countAge();
+        if (validateDate(age)) {
 
             final String nameSend = nameEditText.getText().toString();
             final String secondNameSend = secondNameEditText.getText().toString();
             final String ageSend = String.valueOf(age);
 
-            Intent intent = SecondActvity.createIntent(
+            Intent intent = SecondActivity.createIntent(
                     this,
                     nameSend,
                     secondNameSend,
@@ -71,27 +74,21 @@ public class MainActivity extends Activity {
         newFragment.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(final DatePicker datePicker, final int year, final int monthOfYear, final int dayOfMonth) {
-                dateTextView.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                dateTextView.setText(getString(R.string.format_date, dayOfMonth, (monthOfYear + 1), year));
             }
         });
         newFragment.show(getFragmentManager(), DATAPICKER_KEY);
     }
 
-    private int counterAge() {
-
-        final int year;
-        final int month;
-        final int day;
-
+    private int countAge() {
         String str = dateTextView.getText().toString();
         String[] tmp = str.split("-");
-        if (tmp.length == 3) {
-            day = Integer.parseInt(tmp[0]);
-            month = Integer.parseInt(tmp[1]);
-            year = Integer.parseInt(tmp[2]);
-        } else {
+        if (tmp.length != 3) {
             return -1;
         }
+        final int day = Integer.parseInt(tmp[0]);
+        final int month = Integer.parseInt(tmp[1]);
+        final int year = Integer.parseInt(tmp[2]);
 
         final Calendar calendar = Calendar.getInstance();
         final int currentMonth = calendar.get(Calendar.MONTH);
@@ -100,7 +97,7 @@ public class MainActivity extends Activity {
         int age = currentYear - year;
 
         if (currentMonth < month - 1) {
-                age--;
+            age--;
         } else if (currentMonth == month - 1) {
             if (currentDay < day) {
                 age--;
@@ -110,14 +107,14 @@ public class MainActivity extends Activity {
     }
 
 
-    private boolean validationDate(final int age){
-        if (nameEditText.getText().toString().equals("")){
+    private boolean validateDate(final int age) {
+        if (TextUtils.isEmpty(nameEditText.getText().toString())) {
             Toast toast = Toast.makeText(getApplicationContext(),
                     getApplicationContext().getResources().getString(R.string.error_field_name),
                     Toast.LENGTH_SHORT);
             toast.show();
             return false;
-        } else if (secondNameEditText.getText().toString().equals("")){
+        } else if (TextUtils.isEmpty(secondNameEditText.getText().toString())) {
             Toast toast = Toast.makeText(getApplicationContext(),
                     getApplicationContext().getResources().getString(R.string.error_field_secondname),
                     Toast.LENGTH_SHORT);

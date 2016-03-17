@@ -8,4 +8,5 @@
     <string name="error_field_age">Ошибка, неверная дата рождения</string>
     <string name="error_field_name">Ошибка, поле "Имя" не должно быть пустым</string>
     <string name="error_field_secondname">Ошибка, поле "Фамилия" не должно быть пустым</string>
+    <string formatted="false" name="format_date">%d-%d-%d</string>
 </resources>
