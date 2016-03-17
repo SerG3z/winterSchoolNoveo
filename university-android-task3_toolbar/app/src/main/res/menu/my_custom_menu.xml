@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <item
+        android:id="@+id/room"
+        android:icon="@drawable/ic_room_black_24dp"
+        android:title="@string/room"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/rowing"
+        android:icon="@drawable/ic_rowing_black_24dp"
+        android:title="@string/rowing"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/ic_settings_power_black_24dp"
+        android:title="@string/setting"
+        app:showAsAction="ifRoom" />
+
+</menu>

@@ -12,5 +12,14 @@
     <string name="custom">Action bar with Custom view</string>
     <string name="themed">Action bar with custom theme</string>
     <string name="action">Action bar with Action view</string>
+    
+    
+    <string name="room">room</string>
+    <string name="rowing">rowing</string>
+    <string name="setting">setting</string>
+
+    <string name="click_room">click button room</string>
+    <string name="click_rowing">click button rowing</string>
+    <string name="click_setting">click button setting</string>
 
 </resources>

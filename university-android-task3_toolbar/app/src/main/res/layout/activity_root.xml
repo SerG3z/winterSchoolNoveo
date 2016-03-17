@@ -15,10 +15,10 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/simple_toolbar_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/simple"
-            android:onClick="dummy"/>
+            android:text="@string/simple" />
 
         <Button
             android:layout_width="match_parent"

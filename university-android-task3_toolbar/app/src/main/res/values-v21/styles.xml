@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:colorPrimary">#009688</item>
+        <item name="android:colorPrimaryDark">#00796B</item>
+        <item name="android:colorAccent">#B2DFDB</item>
+        <item name="android:textColorPrimary">#fff</item>
+    </style>
+
+    <style name="MyTheme.Popup" parent="Base.ThemeOverlay.AppCompat">
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="android:background">#00796B</item>
+    </style>
+
+</resources>
