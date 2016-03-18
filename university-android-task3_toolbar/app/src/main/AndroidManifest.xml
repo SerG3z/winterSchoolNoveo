@@ -36,7 +36,7 @@
         </activity>
         <activity android:name=".SpinnerActivity"
             android:parentActivityName=".RootActivity"
-            android:theme="@style/MyTheme">
+            android:theme="@style/MyThemeSpinner">
         </activity>
     </application>
 

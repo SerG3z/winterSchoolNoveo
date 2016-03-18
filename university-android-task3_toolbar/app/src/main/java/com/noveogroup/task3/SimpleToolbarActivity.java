@@ -43,11 +43,11 @@ public class SimpleToolbarActivity extends AppCompatActivity {
                 return true;
 
             case R.id.rowing:
-            Toast.makeText(getApplicationContext(), R.string.click_rowing, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.click_rowing, Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.setting:
-            Toast.makeText(getApplicationContext(), R.string.click_setting, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.click_setting, Toast.LENGTH_SHORT).show();
                 return true;
 
             default:

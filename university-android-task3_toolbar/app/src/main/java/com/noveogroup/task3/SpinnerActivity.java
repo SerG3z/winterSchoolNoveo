@@ -5,28 +5,42 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnItemSelected;
 
 /**
  * Created by serg on 18.03.16.
  */
 public class SpinnerActivity extends AppCompatActivity {
 
-    @Bind(R.id.simple_toolbar)
-    Toolbar simpleToolbar;
+    public static final int COUNT_RECORD_IN_SPINNER1 = 5;
+    @Bind(R.id.spinner_nav)
+    Spinner spinnerToolbar;
+
+    @Bind(R.id.spinner_toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.simple_layout);
+        setContentView(R.layout.spinner_toolbar_activity);
         ButterKnife.bind(this);
 
-        simpleToolbar.setTitle(R.string.simple);
-        setSupportActionBar(simpleToolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        addItemsToSpinner();
     }
 
     @Override
@@ -54,6 +68,27 @@ public class SpinnerActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    private void addItemsToSpinner() {
+        ArrayList<String> list = new ArrayList<String>();
+        for (int i = 0; i < COUNT_RECORD_IN_SPINNER1; i++) {
+            list.add(getString(R.string.record, i));
+        }
+
+        SpinnerAdapter spinAdapter = new SpinnerAdapter(
+                getApplicationContext(), list);
+
+        spinnerToolbar.setAdapter(spinAdapter);
+    }
+
+    @OnItemSelected(R.id.spinner_nav)
+    public void onClickItemSpinner(AdapterView<?> adapter, View v, int position, long id) {
+        String item = adapter.getItemAtPosition(position).toString();
+
+        Toast.makeText(getApplicationContext(), getString(R.string.select, item),
+                Toast.LENGTH_SHORT).show();
+    }
+
 
     @Override
     protected void onDestroy() {

@@ -13,11 +13,20 @@
         <item name="android:background">#00796B</item>
     </style>
 
-    <style name="Widget.MyApp.HeaderBar.Spinner" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
-        <item name="android:background">?android:selectableItemBackground</item>
-        <item name="android:dropDownSelector">?android:selectableItemBackground</item>
-        <item name="android:divider">@null</item>
-        <item name="android:overlapAnchor">true</item>
+    <style name="MyThemeSpinner" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:colorPrimaryDark">#F57F17</item>
+        <item name="android:colorPrimary">#F9A825</item>
+        <item name="android:colorAccent">#FFEB3B</item>
+        <item name="android:textColorPrimary">#FFFDE7</item>
     </style>
+
+    <style name="MyThemeSpinner.Popup" parent="Base.ThemeOverlay.AppCompat">
+        <item name="android:textColorPrimary">#FFFDE7</item>
+        <item name="android:background">#F57F17</item>
+    </style>
+
+
 
 </resources>

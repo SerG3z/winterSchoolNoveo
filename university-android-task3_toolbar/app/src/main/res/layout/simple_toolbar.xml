@@ -6,6 +6,6 @@
     app:popupTheme="@style/MyTheme.Popup"
      android:layout_height="wrap_content"
      android:layout_width="match_parent"
-     android:background="#009688"
+     android:background="@color/simple_toolbar"
     />
 

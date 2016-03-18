@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="yellow_spinner" type="color">#F9A825</item>
+    <item name="simple_toolbar" type="color">#009688</item>
+
+</resources>

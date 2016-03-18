@@ -54,7 +54,7 @@ public class RootActivity extends AppCompatActivity {
 
     @OnClick(R.id.spinner_button)
     public void onClickSpinnerButton() {
-        Intent intent = new Intent(this, SimpleToolbarActivity.class);
+        Intent intent = new Intent(this, SpinnerActivity.class);
         startActivity(intent);
     }
 

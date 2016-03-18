@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".RootActivity">
 
     <LinearLayout
@@ -18,51 +18,33 @@
             android:id="@+id/simple_toolbar_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/simple" />
+            android:text="@string/simple"/>
 
         <Button
             android:id="@+id/simple_toolbar_up_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/simple_up" />
+            android:text="@string/simple_up"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/split"
-            android:onClick="dummy"/>
 
         <Button
             android:id="@+id/toolbar_tabs_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tabs"
-            android:onClick="dummy"/>
+            android:text="@string/tabs"/>
 
         <Button
             android:id="@+id/spinner_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/list"
-            android:onClick="dummy"/>
+            android:text="@string/list"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/custom"
-            android:onClick="dummy"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/themed"
-            android:onClick="dummy"/>
 
         <Button
             android:id="@+id/toolbar_actionview_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/action" />
+            android:text="@string/action"/>
 
     </LinearLayout>
 </ScrollView>
