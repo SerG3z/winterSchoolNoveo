@@ -2,5 +2,14 @@
 <resources>
 
     <string name="app_name">Task4</string>
+    <string name="name_fragment1">Fragment 1</string>
+    <string name="name_fragment2">Fragment 2</string>
+    <string name="name_fragment3">Fragment 3</string>
+    <string name="name_fragment4">Fragment 4</string>
+
+    <string name="text_dialog">this DialogFragment</string>
+
+    <string name="button_ok">Ok</string>
+    <string name="button_cancel">Cancel</string>
 
 </resources>

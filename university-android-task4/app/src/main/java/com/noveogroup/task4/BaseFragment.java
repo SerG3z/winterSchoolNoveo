@@ -25,9 +25,4 @@ public class BaseFragment extends Fragment {
         return view;
     }
 
-    public void setText(String string) {
-        TextView textView = (TextView) getView().findViewById(R.id.textView1);
-        textView.setText(string);
-    }
-
 }

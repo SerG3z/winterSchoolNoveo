@@ -1,13 +1,46 @@
-<FrameLayout
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/frame_container1"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/fragment_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:layout_alignParentTop="true"
+        />
 
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:layout_gravity="center"/>
+    <FrameLayout
+        android:id="@+id/frame_container2"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/frame_container1"
+        android:layout_margin="20dp"
+        />
 
-</FrameLayout>
+    <FrameLayout
+        android:id="@+id/frame_container3"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/frame_container2"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="40dp"
+        />
+
+    <FrameLayout
+        android:id="@+id/frame_container4"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/frame_container2"
+        android:layout_alignParentRight="true"
+        android:layout_margin="40dp"
+        />
+
+
+
+</RelativeLayout>
