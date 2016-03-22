@@ -3,7 +3,6 @@ package com.sample.drawer.utils;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -11,19 +10,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
-import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.sample.drawer.R;
-import com.sample.drawer.fragments.MondayFragment;
 import com.sample.drawer.fragments.NewsFragment;
-import com.sample.drawer.fragments.ScheduleFragment;
 import com.sample.drawer.fragments.TaskFragment;
+import com.sample.drawer.fragments.ScheduleViewPagerFragment;
 
 public class Utils {
     public static final int ACCOUNTS_LOGOUT_ID = 110;
@@ -45,7 +39,7 @@ public class Utils {
                 if (drawerItem != null) {
 
                     if (drawerItem.getIdentifier() == 1) {
-                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new MondayFragment()).commit();
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, ScheduleViewPagerFragment.newIntent()).commit();
                     } else if (drawerItem.getIdentifier() == 2) {
                         activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, new TaskFragment()).commit();
                     } else if (drawerItem.getIdentifier() == 3) {
