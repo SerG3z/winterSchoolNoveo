@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.webkit.WebViewFragment;
 
 /**
@@ -13,6 +12,14 @@ import android.webkit.WebViewFragment;
 public class Fragment4WebView extends WebViewFragment {
 
     private static final String url = "https://github.com/noveogroup/university-android-task4";
+
+    public Fragment4WebView() {
+    }
+
+    public static Fragment4WebView newInstance() {
+        Fragment4WebView fragment = new Fragment4WebView();
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
