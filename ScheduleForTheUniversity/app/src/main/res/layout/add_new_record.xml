@@ -6,12 +6,15 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/number_lesson"
+        android:id="@+id/time_lesson"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:layout_margin="16dp"
-        android:hint="@string/number_lesson"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:singleLine="true"
+        android:hint="@string/time_lesson"
 
         />
 
@@ -20,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:singleLine="true"
         android:hint="@string/name_lesson"
         />
 
@@ -28,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:singleLine="true"
         android:hint="@string/fio_teacher"
         />
 
@@ -36,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:singleLine="true"
         android:hint="@string/number_auditory"
         />
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Schedule</string>
+    <string name="app_name">Расписание</string>
 
     <!-- Navigation Drawer-->
     <string name="info_schedule">Расписание</string>
@@ -18,11 +18,22 @@
     <string-array name="type_week_list">
         <item>Каждую</item>
         <item>Чётная</item>
-        <item>нечетная</item>
+        <item>Нечётная</item>
+    </string-array>
+
+    <!-- Array for day week-->
+    <string-array name="day_week_list">
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+        <item>Суббота</item>
+        <item>воскресенье</item>
     </string-array>
 
     <!-- add new lesson-->
-    <string name="number_lesson">№ Занятия</string>
+    <string name="time_lesson">Время</string>
     <string name="name_lesson">Название предмета</string>
     <string name="fio_teacher">ФИО Преподавателя</string>
     <string name="number_auditory">Аудитория</string>

@@ -1,4 +1,5 @@
-package com.sample.drawer.fragments;
+package com.sample.drawer.fragments.task;
+
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,12 +10,10 @@ import android.view.ViewGroup;
 import com.sample.drawer.R;
 
 
-public class NewsFragment extends Fragment {
+public class TaskFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.new_fragment, container, false);
+        return inflater.inflate(R.layout.task_fragment, container, false);
     }
-
-
 }

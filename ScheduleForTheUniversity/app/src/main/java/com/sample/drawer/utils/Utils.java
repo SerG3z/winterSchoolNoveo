@@ -15,9 +15,9 @@ import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.sample.drawer.R;
-import com.sample.drawer.fragments.NewsFragment;
-import com.sample.drawer.fragments.TaskFragment;
-import com.sample.drawer.fragments.ScheduleViewPagerFragment;
+import com.sample.drawer.fragments.news.NewsFragment;
+import com.sample.drawer.fragments.task.TaskFragment;
+import com.sample.drawer.fragments.schedule.ScheduleViewPagerFragment;
 
 public class Utils {
     public static final int ACCOUNTS_LOGOUT_ID = 110;

@@ -1,18 +1,16 @@
-package com.sample.drawer.fragments;
+package com.sample.drawer.fragments.schedule;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.sample.drawer.R;
+import com.sample.drawer.adapter.ScreenSlidePagerAdapter;
 import com.sample.drawer.fragments.animation.ZoomOutPageTransformer;
 
 /**
@@ -20,13 +18,11 @@ import com.sample.drawer.fragments.animation.ZoomOutPageTransformer;
  */
 public class ScheduleViewPagerFragment extends Fragment {
 
-    private static final int NUM_PAGES = 7;
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
 
     public ScheduleViewPagerFragment() {
     }
-
 
     public static ScheduleViewPagerFragment newIntent() {
         ScheduleViewPagerFragment viewPagerFragment = new ScheduleViewPagerFragment();
@@ -42,21 +38,5 @@ public class ScheduleViewPagerFragment extends Fragment {
         mPager.setAdapter(mPagerAdapter);
         mPager.setPageTransformer(true, new ZoomOutPageTransformer());
         return view;
-    }
-
-    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-        public ScreenSlidePagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return ItemDayFragment.newInstance(position);
-        }
-
-        @Override
-        public int getCount() {
-            return NUM_PAGES;
-        }
     }
 }

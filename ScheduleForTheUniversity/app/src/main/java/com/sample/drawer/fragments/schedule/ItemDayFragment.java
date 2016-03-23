@@ -1,4 +1,4 @@
-package com.sample.drawer.fragments;
+package com.sample.drawer.fragments.schedule;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ public class ItemDayFragment extends Fragment {
     int pageNumber;
     int backColor;
 
-    static ItemDayFragment newInstance(int page) {
+    public static ItemDayFragment newInstance(int page) {
         ItemDayFragment scheduleFragment = new ItemDayFragment();
         Bundle arguments = new Bundle();
         arguments.putInt(ARGUMENT_PAGE_NUMBER, page);
