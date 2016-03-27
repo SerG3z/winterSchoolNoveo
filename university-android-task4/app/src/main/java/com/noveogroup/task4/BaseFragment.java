@@ -40,26 +40,26 @@ public class BaseFragment extends Fragment {
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         if (getArguments() != null && !getArguments().getBoolean(CLICKFLAG_KEY)) {
             flagListener = false;
-        } else if (getArguments() != null && getArguments().getBoolean(CLICKFLAG_KEY)){
+        } else if (getArguments() != null && getArguments().getBoolean(CLICKFLAG_KEY)) {
             flagListener = true;
         }
-            if (flagListener) {
-                try {
-                    this.listener = (BaseFragmentListener) getActivity();
-                } catch (ClassCastException e) {
-                    Log.e("TEST", "The activity should implement BaseFragmentListener interface", e);
-                }
-
-
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (listener != null) {
-                            listener.onBaseFragmentClicked();
-                        }
-                    }
-                });
+        if (flagListener) {
+            try {
+                this.listener = (BaseFragmentListener) getActivity();
+            } catch (ClassCastException e) {
+                Log.e("TEST", "The activity should implement BaseFragmentListener interface", e);
             }
+
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        listener.onBaseFragmentClicked();
+                    }
+                }
+            });
+        }
 
     }
 

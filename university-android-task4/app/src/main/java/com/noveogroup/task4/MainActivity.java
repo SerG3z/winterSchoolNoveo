@@ -5,19 +5,22 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 
 
 public class MainActivity extends ActionBarActivity implements Fragment3DialogFragment.DialogFragmentListener, BaseFragment.BaseFragmentListener {
 
-    private static final String TAG_FRAGMENT1 = "fragment1";
-    private static final String TAG_FRAGMENT3 = "fragment3";
+    private static final String TAG_FRAGMENT1 = "baseFragment";
+    private static final String TAG_FRAGMENT3 = "dialogFragment";
+    private static final String TAG_FRAGMENT3_SHOW = "dialog_show";
+    private static final String TAP_FRAGMENT3_KEY = "key_tap";
     private static final String FIRSTCLICK_KEY = "key_bool";
-
-    BaseFragment fragment1;
-    Fragment3DialogFragment fragment3;
-    Fragment4WebView fragment4;
+    BaseFragment baseFragment;
+    Fragment3DialogFragment dialogFragment;
+    Fragment4WebView webViewFragment;
     FragmentManager fragmentManager;
 
+    private boolean clickDialogFragment = true;
     private boolean firstClick = true;
 
     @Override
@@ -28,27 +31,40 @@ public class MainActivity extends ActionBarActivity implements Fragment3DialogFr
         fragmentManager = getFragmentManager();
 
         if (savedInstanceState == null) {
-            fragment1 = BaseFragment.newInstance(false);
-            fragment3 = Fragment3DialogFragment.newInstance();
-            fragment4 = Fragment4WebView.newInstance();
+            baseFragment = BaseFragment.newInstance(false);
+            dialogFragment = Fragment3DialogFragment.newInstance();
+            webViewFragment = Fragment4WebView.newInstance();
 
             fragmentManager.beginTransaction()
-                    .add(R.id.frame_container1, fragment1, TAG_FRAGMENT1)
+                    .add(R.id.frame_container1, baseFragment, TAG_FRAGMENT1)
                     .commit();
 
             fragmentManager.beginTransaction()
-                    .add(R.id.frame_container3, fragment3, TAG_FRAGMENT3)
+                    .add(R.id.frame_container3, dialogFragment, TAG_FRAGMENT3)
                     .commit();
 
             fragmentManager.beginTransaction()
-                    .add(R.id.frame_container4, fragment4)
+                    .add(R.id.frame_container4, webViewFragment)
                     .commit();
         }
     }
 
     @Override
     public void onFragmentClicked() {
-        fragment3.newInstance().show(fragmentManager, TAG_FRAGMENT3);
+        if (clickDialogFragment) {
+                dialogFragment = Fragment3DialogFragment.newInstance();
+                clickDialogFragment = false;
+                fragmentManager.beginTransaction()
+                        .add(dialogFragment, TAG_FRAGMENT3_SHOW)
+                        .show(dialogFragment)
+                        .commit();
+        } else {
+            clickDialogFragment = true;
+            if (dialogFragment != null)
+                fragmentManager.beginTransaction()
+                        .remove(dialogFragment)
+                        .commit();
+        }
     }
 
     @Override
@@ -82,12 +98,14 @@ public class MainActivity extends ActionBarActivity implements Fragment3DialogFr
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(FIRSTCLICK_KEY, firstClick);
+        outState.putBoolean(TAP_FRAGMENT3_KEY, clickDialogFragment);
     }
 
     @Override
     protected void onRestoreInstanceState(final Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         firstClick = savedInstanceState.getBoolean(FIRSTCLICK_KEY);
+        clickDialogFragment = savedInstanceState.getBoolean(TAP_FRAGMENT3_KEY);
     }
 
 }

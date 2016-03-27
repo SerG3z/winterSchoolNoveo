@@ -17,8 +17,7 @@ public class Fragment4WebView extends WebViewFragment {
     }
 
     public static Fragment4WebView newInstance() {
-        Fragment4WebView fragment = new Fragment4WebView();
-        return fragment;
+        return new Fragment4WebView();
     }
 
     @Override

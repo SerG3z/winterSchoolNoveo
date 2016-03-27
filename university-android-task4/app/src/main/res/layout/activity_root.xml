@@ -1,47 +1,39 @@
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/relative_container"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/frame_container1"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:layout_margin="20dp"
-        />
+        android:layout_margin="20dp" />
 
     <fragment
         android:id="@+id/fragment2"
         android:name="com.noveogroup.task4.BaseFragment"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:tag="@string/name_fragment2"
         android:layout_below="@id/frame_container1"
         android:layout_margin="20dp"
-        />
+        android:tag="@string/name_fragment2" />
 
     <FrameLayout
         android:id="@+id/frame_container3"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="100dp"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/fragment2"
-        android:layout_margin="40dp"
-        />
+        android:layout_margin="40dp" />
 
     <FrameLayout
         android:id="@+id/frame_container4"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="150dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_below="@id/fragment2"
-        android:layout_margin="40dp"
-        />
+        android:layout_margin="40dp" />
 
 
 </RelativeLayout>
