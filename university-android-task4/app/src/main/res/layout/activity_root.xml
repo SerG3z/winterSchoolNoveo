@@ -6,34 +6,34 @@
     <FrameLayout
         android:id="@+id/frame_container1"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/height_container_1_2"
         android:layout_alignParentTop="true"
-        android:layout_margin="20dp" />
+        android:layout_margin="@dimen/margin_cintainer_1_2" />
 
     <fragment
         android:id="@+id/fragment2"
         android:name="com.noveogroup.task4.BaseFragment"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/height_container_1_2"
         android:layout_below="@id/frame_container1"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/margin_cintainer_1_2"
         android:tag="@string/name_fragment2" />
 
     <FrameLayout
         android:id="@+id/frame_container3"
-        android:layout_width="100dp"
+        android:layout_width="@dimen/width_container_3"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/fragment2"
-        android:layout_margin="40dp" />
+        android:layout_margin="@dimen/margin_cintainer_3_4" />
 
     <FrameLayout
         android:id="@+id/frame_container4"
-        android:layout_width="150dp"
+        android:layout_width="@dimen/width_container_4"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_below="@id/fragment2"
-        android:layout_margin="40dp" />
+        android:layout_margin="@dimen/margin_cintainer_3_4" />
 
 
 </RelativeLayout>

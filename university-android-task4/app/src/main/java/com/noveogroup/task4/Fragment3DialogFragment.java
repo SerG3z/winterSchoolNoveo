@@ -1,6 +1,7 @@
 package com.noveogroup.task4;
 
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -14,10 +15,19 @@ import android.view.ViewGroup;
 public class Fragment3DialogFragment extends DialogFragment {
 
     private DialogFragmentListener listener;
+    private boolean clikedFlag = true;
 
     public static Fragment3DialogFragment newInstance() {
         Fragment3DialogFragment myFragment = new Fragment3DialogFragment();
         return myFragment;
+    }
+
+    public boolean isClikedFlag() {
+        return clikedFlag;
+    }
+
+    public void setClikedFlag(final boolean clikedFlag) {
+        this.clikedFlag = clikedFlag;
     }
 
     @Nullable
@@ -39,14 +49,20 @@ public class Fragment3DialogFragment extends DialogFragment {
             public void onClick(View view) {
                 if (listener != null) {
                     listener.onFragmentClicked();
-
                 }
             }
         });
     }
 
+    @Override
+    public void onDismiss(final DialogInterface dialog) {
+        super.onDismiss(dialog);
+        clikedFlag = false;
+    }
 
     public interface DialogFragmentListener {
         void onFragmentClicked();
     }
+
+
 }

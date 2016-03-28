@@ -13,9 +13,6 @@ public class Fragment4WebView extends WebViewFragment {
 
     private static final String url = "https://github.com/noveogroup/university-android-task4";
 
-    public Fragment4WebView() {
-    }
-
     public static Fragment4WebView newInstance() {
         return new Fragment4WebView();
     }
@@ -30,26 +27,6 @@ public class Fragment4WebView extends WebViewFragment {
         getWebView().getSettings().setBuiltInZoomControls(true);
         getWebView().loadUrl(url);
         return result;
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 }
 

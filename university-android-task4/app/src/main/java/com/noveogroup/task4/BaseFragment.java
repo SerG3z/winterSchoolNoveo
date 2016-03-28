@@ -17,9 +17,6 @@ public class BaseFragment extends Fragment {
     private BaseFragmentListener listener;
     private boolean flagListener = true;
 
-    public BaseFragment() {
-    }
-
     public static BaseFragment newInstance(boolean flag) {
         BaseFragment fragment = new BaseFragment();
         Bundle args = new Bundle();
@@ -38,10 +35,12 @@ public class BaseFragment extends Fragment {
 
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
-        if (getArguments() != null && !getArguments().getBoolean(CLICKFLAG_KEY)) {
-            flagListener = false;
-        } else if (getArguments() != null && getArguments().getBoolean(CLICKFLAG_KEY)) {
-            flagListener = true;
+        if (getArguments() != null) {
+            if (!getArguments().getBoolean(CLICKFLAG_KEY)) {
+                flagListener = false;
+            } else if (getArguments().getBoolean(CLICKFLAG_KEY)) {
+                flagListener = true;
+            }
         }
         if (flagListener) {
             try {
@@ -49,7 +48,6 @@ public class BaseFragment extends Fragment {
             } catch (ClassCastException e) {
                 Log.e("TEST", "The activity should implement BaseFragmentListener interface", e);
             }
-
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -60,7 +58,6 @@ public class BaseFragment extends Fragment {
                 }
             });
         }
-
     }
 
     public interface BaseFragmentListener {

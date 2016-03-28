@@ -4,29 +4,28 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 
 
-public class MainActivity extends ActionBarActivity implements Fragment3DialogFragment.DialogFragmentListener, BaseFragment.BaseFragmentListener {
+public class MainActivity extends AppCompatActivity implements Fragment3DialogFragment.DialogFragmentListener, BaseFragment.BaseFragmentListener {
 
     private static final String TAG_FRAGMENT1 = "baseFragment";
     private static final String TAG_FRAGMENT3 = "dialogFragment";
     private static final String TAG_FRAGMENT3_SHOW = "dialog_show";
-    private static final String TAP_FRAGMENT3_KEY = "key_tap";
     private static final String FIRSTCLICK_KEY = "key_bool";
-    BaseFragment baseFragment;
-    Fragment3DialogFragment dialogFragment;
-    Fragment4WebView webViewFragment;
-    FragmentManager fragmentManager;
 
-    private boolean clickDialogFragment = true;
     private boolean firstClick = true;
+
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_root);
+
+        BaseFragment baseFragment;
+        Fragment4WebView webViewFragment;
+        Fragment3DialogFragment dialogFragment;
 
         fragmentManager = getFragmentManager();
 
@@ -37,13 +36,7 @@ public class MainActivity extends ActionBarActivity implements Fragment3DialogFr
 
             fragmentManager.beginTransaction()
                     .add(R.id.frame_container1, baseFragment, TAG_FRAGMENT1)
-                    .commit();
-
-            fragmentManager.beginTransaction()
                     .add(R.id.frame_container3, dialogFragment, TAG_FRAGMENT3)
-                    .commit();
-
-            fragmentManager.beginTransaction()
                     .add(R.id.frame_container4, webViewFragment)
                     .commit();
         }
@@ -51,19 +44,22 @@ public class MainActivity extends ActionBarActivity implements Fragment3DialogFr
 
     @Override
     public void onFragmentClicked() {
-        if (clickDialogFragment) {
-                dialogFragment = Fragment3DialogFragment.newInstance();
-                clickDialogFragment = false;
-                fragmentManager.beginTransaction()
-                        .add(dialogFragment, TAG_FRAGMENT3_SHOW)
-                        .show(dialogFragment)
-                        .commit();
+        Fragment3DialogFragment dialog = (Fragment3DialogFragment) fragmentManager.findFragmentByTag(TAG_FRAGMENT3_SHOW);
+        if (dialog == null) {
+            dialog = Fragment3DialogFragment.newInstance();
+        }
+
+        if (dialog.isVisible()) {
+            dialog.setClikedFlag(false);
+        }
+
+        if (dialog.isClikedFlag()) {
+            dialog.setClikedFlag(false);
+            dialog.show(fragmentManager, TAG_FRAGMENT3_SHOW);
         } else {
-            clickDialogFragment = true;
-            if (dialogFragment != null)
-                fragmentManager.beginTransaction()
-                        .remove(dialogFragment)
-                        .commit();
+            dialog.setClikedFlag(true);
+            if (dialog.isVisible())
+                dialog.dismiss();
         }
     }
 
@@ -98,14 +94,12 @@ public class MainActivity extends ActionBarActivity implements Fragment3DialogFr
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBoolean(FIRSTCLICK_KEY, firstClick);
-        outState.putBoolean(TAP_FRAGMENT3_KEY, clickDialogFragment);
     }
 
     @Override
     protected void onRestoreInstanceState(final Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         firstClick = savedInstanceState.getBoolean(FIRSTCLICK_KEY);
-        clickDialogFragment = savedInstanceState.getBoolean(TAP_FRAGMENT3_KEY);
     }
 
 }

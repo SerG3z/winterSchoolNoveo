@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="@string/name_fragment3"
-        android:textSize="18dp"
+        android:textSize="@dimen/my_text_size"
         android:textStyle="bold" />
 
 </LinearLayout>
