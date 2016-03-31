@@ -2,9 +2,13 @@ package com.noveo.internship.databaseexample.fragments;
 
 import android.app.Fragment;
 import android.content.AsyncQueryHandler;
+import android.content.ComponentCallbacks;
 import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +33,7 @@ public class UpFragment extends Fragment {
     EditText costEditText;
 
     public static Fragment newInstance() {
-        UpFragment upFragment = new UpFragment();
-        return upFragment;
+        return new UpFragment();
     }
 
     @Override
@@ -42,8 +45,7 @@ public class UpFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(getActivity());
-
+        ButterKnife.bind(this, view);
     }
 
     private void insertData() {
@@ -59,6 +61,28 @@ public class UpFragment extends Fragment {
         }
     }
 
+    private void deleteLastData() {
+        final String[] id = new String[1];
+        new AsyncQueryHandler(getActivity().getContentResolver()) {
+            @Override
+            protected void onQueryComplete(final int token, final Object cookie, final Cursor cursor) {
+                super.onQueryComplete(token, cookie, cursor);
+                Log.d("base data", String.valueOf(cursor));
+                Log.d("base data", String.valueOf(cursor.getCount()));
+
+//                id[1] = cursor.getString(cursor.getColumnIndex(ContentDescriptor.Toys.Cols.TITLE));
+//                id[2] = cursor.getString(cursor.getColumnIndex(ContentDescriptor.Toys.Cols.COST));
+                Log.d("base data id = ", cursor.getString(cursor.getColumnIndex(ContentDescriptor.Toys.Cols.ID)));
+//                Log.d("base data title = ", id[1]);
+//                Log.d("base data cost = ", id[2]);
+
+
+            }
+        }.startQuery(1, null, ContentDescriptor.Toys.TABLE_URI, new String[] {"MAX(" + ContentDescriptor.Toys.Cols.ID + ")"}, null, null, ContentDescriptor.Toys.Cols.ID);
+//                .startDelete(1, null, ContentDescriptor.Toys.TABLE_URI, ContentDescriptor.Toys.Cols.ID + " = ?", new String[]{String.valueOf(id)});
+
+    }
+
     @OnClick(R.id.insert)
     public void onClickButtonSave() {
         insertData();
@@ -66,7 +90,7 @@ public class UpFragment extends Fragment {
 
     @OnClick(R.id.delete)
     public void clickButtonInsert() {
-
+        deleteLastData();
     }
 
     @Override

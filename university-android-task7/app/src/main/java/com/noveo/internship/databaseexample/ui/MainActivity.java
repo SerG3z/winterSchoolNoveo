@@ -4,12 +4,13 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.noveo.internship.databaseexample.R;
 import com.noveo.internship.databaseexample.fragments.DownFragment;
 import com.noveo.internship.databaseexample.fragments.UpFragment;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity  {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,4 +27,6 @@ public class MainActivity extends Activity {
                 .add(R.id.layout_for_down_fragment, downFragment)
                 .commit();
     }
+
+
 }

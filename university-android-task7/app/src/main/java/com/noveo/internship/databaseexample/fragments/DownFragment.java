@@ -42,7 +42,7 @@ public class DownFragment extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(getActivity());
+        ButterKnife.bind(this, view);
         loaderManager = getLoaderManager();
 
         String[] columns = new String[]{ContentDescriptor.Toys.Cols.TITLE, ContentDescriptor.Toys.Cols.COST};
@@ -83,4 +83,8 @@ public class DownFragment extends Fragment implements LoaderManager.LoaderCallba
     private void showData() {
         loaderManager.restartLoader(0, null, this);
     }  // обновление данных
+
+    public interface DownFragmentListener {
+        void DownFragmentShow();
+    }
 }
