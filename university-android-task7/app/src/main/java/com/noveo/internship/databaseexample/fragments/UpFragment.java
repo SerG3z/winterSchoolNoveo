@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
+import android.provider.Browser;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -52,7 +53,7 @@ public class UpFragment extends Fragment {
         if (!TextUtils.isEmpty(titleEditText.getText()) && !TextUtils.isEmpty(costEditText.getText())) {
             ContentValues values = new ContentValues();
             values.put(ContentDescriptor.Toys.Cols.TITLE, String.valueOf(titleEditText.getText()));
-            values.put(ContentDescriptor.Toys.Cols.COST, Integer.valueOf(String.valueOf(costEditText.getText())));
+            values.put(ContentDescriptor.Toys.Cols.COST, String.valueOf(String.valueOf(costEditText.getText())));
 
             new AsyncQueryHandler(getActivity().getContentResolver()) {
             }.startInsert(1, null, ContentDescriptor.Toys.TABLE_URI, values);
@@ -62,24 +63,22 @@ public class UpFragment extends Fragment {
     }
 
     private void deleteLastData() {
-        final String[] id = new String[1];
         new AsyncQueryHandler(getActivity().getContentResolver()) {
             @Override
             protected void onQueryComplete(final int token, final Object cookie, final Cursor cursor) {
                 super.onQueryComplete(token, cookie, cursor);
-                Log.d("base data", String.valueOf(cursor));
-                Log.d("base data", String.valueOf(cursor.getCount()));
-
-//                id[1] = cursor.getString(cursor.getColumnIndex(ContentDescriptor.Toys.Cols.TITLE));
-//                id[2] = cursor.getString(cursor.getColumnIndex(ContentDescriptor.Toys.Cols.COST));
-                Log.d("base data id = ", cursor.getString(cursor.getColumnIndex(ContentDescriptor.Toys.Cols.ID)));
-//                Log.d("base data title = ", id[1]);
-//                Log.d("base data cost = ", id[2]);
-
-
+//                Log.d("base data", String.valueOf(cursor.getCount()));
+                cursor.moveToLast();
+                String name = cursor.getColumnName(0);
+                String deleteId = cursor.getString(cursor.getColumnIndex(name));
+//                Log.d("base data", name + " = " + deleteId);
+                cursor.close();
+                if (deleteId != null) {
+                    new AsyncQueryHandler(getActivity().getContentResolver()) {}
+                            .startDelete(1, null, ContentDescriptor.Toys.TABLE_URI, ContentDescriptor.Toys.Cols.ID + " =?", new String[]{deleteId});
+                }
             }
         }.startQuery(1, null, ContentDescriptor.Toys.TABLE_URI, new String[] {"MAX(" + ContentDescriptor.Toys.Cols.ID + ")"}, null, null, ContentDescriptor.Toys.Cols.ID);
-//                .startDelete(1, null, ContentDescriptor.Toys.TABLE_URI, ContentDescriptor.Toys.Cols.ID + " = ?", new String[]{String.valueOf(id)});
 
     }
 

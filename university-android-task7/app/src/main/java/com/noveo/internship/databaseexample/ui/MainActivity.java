@@ -17,15 +17,20 @@ public class MainActivity extends Activity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Fragment upFragment = UpFragment.newInstance();
-        Fragment downFragment = DownFragment.newInstance();
-
+        Fragment upFragment;
+        Fragment downFragment;
         FragmentManager fragmentManager = getFragmentManager();
 
-        fragmentManager.beginTransaction()
-                .add(R.id.layout_for_up_fragment, upFragment)
-                .add(R.id.layout_for_down_fragment, downFragment)
-                .commit();
+        if(savedInstanceState == null) {
+
+            upFragment = UpFragment.newInstance();
+            downFragment = DownFragment.newInstance();
+
+            fragmentManager.beginTransaction()
+                    .add(R.id.layout_for_up_fragment, upFragment)
+                    .add(R.id.layout_for_down_fragment, downFragment)
+                    .commit();
+        }
     }
 
 
